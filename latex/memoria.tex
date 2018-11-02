@@ -165,8 +165,6 @@
 			\begin{equation}
 			Necesidad - x_p \leq StockSegunda_p, \forall p \in productos
 			\end{equation}
-			\subsubsection{Analisis del modelo}
-			Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 5 variables y 13 restricciones (sin tener en cuenta las restricciones para que las variables sean numeros enteros no negativos). Las ultimas 10 restricciones estan hechas para juntar el limite de stock y el maximo de elementos que se pueden comprar y que de esta forma el modelo permita incluir otro tipo de productos para comprar y otras restricciones de forma más fácil, para este caso en concreto se podria modelizar con solo 6 restricciones (como esta puesto en el archivo de calc).
 		\subsection{Modelo para el transporte}
 		En esta parte se pide minimizar el coste del transporte de una cantidad de toneladas en 2 rutas, para ello se dispone de los elementos que se han comprado en la parte anterior donde los contenedores y vagones tienen un limite dado por su tipo.
 			\subsubsection{Conjuntos}
@@ -275,10 +273,11 @@
 			\begin{equation}
 			\sum_v^{vagones\ todos}CV_{c,v} \leq 1;\ \forall c \in contenedores\ todos
 			\end{equation}
-			\subsubsection{Analisis del Modelo}
-			Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 72 variables binarias, es decir, que hay $2^{72}$ posibles valores que pueden tomar nuestro resultado, y con 96 restricciones (sin tener en cuenta las que limitan a que las variables sean binarias).
+			
 		\subsection{Programacion Dinamica}
 	\section{Analisis de los resultados}
+	Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 5 variables y 13 restricciones (sin tener en cuenta las restricciones para que las variables sean numeros enteros no negativos). Las ultimas 10 restricciones estan hechas para juntar el limite de stock y el maximo de elementos que se pueden comprar y que de esta forma el modelo permita incluir otro tipo de productos para comprar y otras restricciones de forma más fácil, para este caso en concreto se podria modelizar con solo 6 restricciones (como esta puesto en el archivo de calc).\\
+	Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 72 variables binarias, es decir, que hay $2^{72}$ posibles valores que pueden tomar nuestro resultado, y con 96 restricciones (sin tener en cuenta las que limitan a que las variables sean binarias).
 	\section{Conclusiones acerca de la práctica}
 	\newpage
 %------------------------------------------------------------------------------------------
