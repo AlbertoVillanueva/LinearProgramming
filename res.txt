@@ -1,0 +1,46 @@
+Productos comprados en la Fabrica 1:
+	locomotoras: 2
+	vagones1: 2
+	vagones2: 0
+	contenedores20: 3
+	contenedores40: 2
+
+Productos comprados en la Fabrica 2:
+	locomotoras: 1
+	vagones1: 1
+	vagones2: 2
+	contenedores20: 1
+	contenedores40: 2
+
+Disposición de contenedores en vagones:
+	C1 --> V1
+	C2 --> V2
+	C3 --> V4
+	C4 --> V1
+	C5 --> V4
+	C6 --> V4
+	C7 --> No Asignado
+	C8 --> No Asignado
+Disposición de contenedores en rutas:
+	C1 --> Madrid-Valencia
+	C2 --> Madrid-Valencia
+	C3 --> Madrid-Cadiz
+	C4 --> Madrid-Valencia
+	C5 --> Madrid-Cadiz
+	C6 --> Madrid-Cadiz
+	C7 --> No Asignado
+	C8 --> No Asignado
+Disposición de vagones en rutas:
+	V1 --> Madrid-Valencia
+	V2 --> Madrid-Valencia
+	V3 --> No Asignado
+	V4 --> Madrid-Cadiz
+	V5 --> Madrid-Cadiz
+Disposición de locomotoras en rutas:
+	L1 --> Madrid-Valencia
+	L2 --> Madrid-Cadiz
+	L3 --> No Asignado
+
+Coste Minimizado de la compra: 662360
+Coste Minimizado del traslado: 62800
+Coste Minimizado total       : 725160

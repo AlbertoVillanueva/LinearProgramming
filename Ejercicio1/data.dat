@@ -1,0 +1,41 @@
+data;
+/* seccion de datos */
+
+set PRODUCTOS := locomotoras vagones1 vagones2 contenedores20 contenedores40;
+
+param Necesidad :=
+locomotoras	3
+vagones1	3
+vagones2	2
+contenedores20	4
+contenedores40	4;
+
+param StockPrimera :=
+locomotoras	2
+vagones1	3
+vagones2	2
+contenedores20	4
+contenedores40	4;
+
+param StockSegunda :=
+locomotoras	3
+vagones1	3
+vagones2	2
+contenedores20	2
+contenedores40	3;
+
+param CostePrimera :=
+locomotoras 100200
+vagones1	10500
+vagones2	20040
+contenedores20	20080
+contenedores40	30040;
+
+param CosteSegunda :=
+locomotoras	200220
+vagones1	3440
+vagones2	5660
+contenedores20	25220
+contenedores40	40220;
+
+end;

@@ -1,0 +1,281 @@
+\documentclass[11pt,spanish]{article}
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo} % Palatino font
+\usepackage{amsmath}
+\usepackage{selinput}
+\SelectInputMappings{%
+  aacute={á},
+  ntilde={ñ},
+  Euro={€}
+}
+\usepackage{babel}
+\usepackage{hyperref}
+\usepackage{multirow}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=blue
+}
+\begin{document}
+%------------------------------------------------------------------------------------------
+
+	%---------------------------%
+	%	Stop Numbering Pages	%
+	%---------------------------%
+
+	\pagenumbering{gobble}
+
+%------------------------------------------------------------------------------------------
+	\begin{titlepage} % Suppresses displaying the page number on the title page and the subsequent page counts as page 1
+	
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here
+	
+	\center % Centre everything on the page
+	
+	%---------------%
+	%	Encabezados	%
+	%---------------%
+	
+	\textsc{\LARGE Universidad Carlos III de Madrid}\\[1.5cm] % Main heading such as the name of your university/college
+	
+	\textsc{\Large Grado en Ingeniería Informática}\\[0.5cm] % Major heading such as course name
+	
+	\textsc{\large Heurística y Optimización}\\[0.5cm] % Minor heading such as course title
+	
+	%-----------%
+	%	Titulo	%
+	%-----------%
+	
+	\HRule\\[0.4cm]
+	
+	{\huge\bfseries Práctica: Programación Lineal}\\[0.4cm] % Title of your document
+	
+	\HRule\\[1.5cm]
+	
+	%---------------%
+	%	Author(s)	%
+	%---------------%
+	
+	\begin{minipage}{0.6\textwidth}
+		\begin{flushleft}
+			\large
+			\textit{Autores}\\
+			\textsc{Alberto Villanueva Nieto}\\
+            \textsc{Cristian Cabrera Pinto}
+		\end{flushleft}
+	\end{minipage}
+
+	%-----------%
+	%	Date	%
+	%-----------%
+	
+	\vfill\vfill\vfill % Position the date 3/4 down the remaining page
+	
+	{\large\today} % Date, change the \today to a set date if you want to be precise
+	
+	\vfill % Push the date up 1/4 of the remaining page
+	
+	\end{titlepage}
+	\newpage
+%------------------------------------------------------------------------------------------
+	\tableofcontents
+	\newpage
+%------------------------------------------------------------------------------------------
+
+	%---------------------------%
+	%	Start Numbering Pages	%
+	%---------------------------%
+
+	\pagenumbering{arabic}
+
+%------------------------------------------------------------------------------------------
+	\section{Breve intorducción explicando los contenidos}
+	\section{Descripción de los modelos, argumentando las decisiones tomadas}
+		\subsection{Modelo para la compra}
+			En esta parte se pide minimizar el coste de la compra de unos elementos entre 2 fábricas en función de sus limites de inventario donde el precio del elemento y del transporte desde la fábrica hasta donde se quieren tener varia en función de la fábrica.
+			\subsubsection{Conjuntos}
+			Para poder expresar las variables, los parametros y las ecuaciones de una forma más descriptiva se va a hacer uso de un conjunto que describe los distintos tipos de productos que hay:
+			$$ productos := \{loc, vag1, vag2, cont20, cont40\} $$
+			\subsubsection{Variables de decisión}
+			Aunque a primera vista puede parecer que se necesitan 10 variables de decision (por cada tipo de elemento en cada fábrica) sin embargo, si se sabe los elementos totales que se quieren obtener y los que se van a comprar en una de las dos fábricas, los elementos que se compran en la fábrica restante es la diferencia entre los elementos que se quieren obtener y los que se compran en la primera fábrica, de este modo nuestras variables de decisión serían:
+			\begin{align*}
+			x_{loc}:& Locomotoras\ compradas\ en\ la\ primera\ fábrica \\
+			x_{vag1}:& Vagones\ de\ tipo\ 1\ comprados\ en\ la\ primera\ f\acute{a}brica \\
+			x_{vag2}:& Vagones\ de\ tipo\ 2\ comprados\ en\ la\ primera\ f\acute{a}brica \\
+			x_{cont20}:& Contenedroes\ de\ 20'\ comprados\ en\ la\ primera\ f\acute{a}brica \\
+			x_{cont40}:& Contenedroes\ de\ 40'\ comprados\ en\ la\ primera\ f\acute{a}brica 
+			\end{align*}
+			
+			\subsubsection{Parametros}
+			Para el calculo de la función objetivo y de las restricciones se han hecho con respecto a varios parametro que se nos proporcionaban en el enunciado:
+			
+			\begin{align*}
+			Necesidad_p:& Cantidad\ de\ productos\ tipo\ p\ que\ se\ necesitan. \\
+			Stock\ Primera_p:& Cantidad\ de\ productos\ tipo\ p\ que\ la\ primera\ fabrica\ puede proveer. \\
+			Stock\ Segunda_p:& Cantidad\ de\ productos\ tipo\ p\ que\ la\ segunda\ fabrica\ puede proveer. \\
+			Coste\ Primera_p:& Coste\ de\ comprar\ y\ transportar\ un\ elemento\ p\ de\ la\ primera fabrica\ al\ destino. \\
+			Coste\ Segunda_p:& Coste\ de\ comprar\ y\ transportar\ un\ elemento\ p\ de\ la\ segunda fabrica\ al\ destino. \\
+			&\forall p \in productos 
+			\end{align*}
+			\begin{tabular}{ |c||c|c|c|c|c|  }
+			 \hline
+			 \multirow{2}{*}{Parametro} & \multirow{2}{*}{Locomotoras} &  \multicolumn{2}{|c|}{Vagones} & \multicolumn{2}{|c|}{Contenedores} \\
+			 & & Tipo 1 & Tipo 2 & 20' & 40'\\
+			 \hline
+			 Necesidad & 3 & 3 & 2 & 4 & 4 \\
+			 Stock Primera & 2 & 3 & 2 & 4 & 4 \\
+			 Stock Segunda & 3 & 3 & 2 & 2 & 3 \\
+ 			 Coste Primera & 100200 & 10500 & 20040 & 20080 & 30040 \\
+			 Coste Segunda & 200220 & 3440 & 5660 & 25220 & 40220 \\
+			 \hline
+			\end{tabular}
+
+			\subsubsection{Funcion objetivo}
+			Para la función objetivo se pretende minimizar el coste de comprar los productos en ambas fabricas:
+			$$
+			minimizar\ coste = \sum_p^{productos} (x_p * Coste Primera_p + (Necesidad_p - x_p) * Coste Segunda_p)
+			$$
+			\subsubsection{Restricciones}
+			El problema de optimizacion esta restringido con que las variables sean no negativas (1) enteras (2), que se compren mas productos en la primera fabrica que en la segunda (3), que el precio gastado en cada fabrica no supere en un 10\% al gastado en al otra (4)(5) y que los productos que se compren en cada una de las fabricas esten dentro del limite que tenga esa fabrica (5)(7).
+			\begin{equation}
+			x_p \geq 0, \forall p \in productos
+			\end{equation}
+			\begin{equation}
+			x_p \in \mathbb{Z} , \forall p \in productos
+			\end{equation}
+			\begin{equation}
+			-1 + \sum_p^{productos} x_p > \sum_p^productos (Necesidad_p - x_p)
+			\end{equation}
+			\begin{equation}
+			1.1*\sum_p^{productos} x_p*CostePrimera_p \geq \sum_p^{productos} (Necesidad_p - x_p)*CosteSegunda_p
+			\end{equation}
+			\begin{equation}
+			\sum_p^{productos} x_p*CostePrimera_p \leq 1.1*\sum_p^{productos} (Necesidad_p - x_p)*CosteSegunda_p
+			\end{equation}
+			\begin{equation}
+			x_p \leq StockPrimera_p, \forall p \in productos
+			\end{equation}
+			\begin{equation}
+			Necesidad - x_p \leq StockSegunda_p, \forall p \in productos
+			\end{equation}
+			\subsubsection{Analisis del modelo}
+				Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 5 variables y 13 restricciones (sin tener en cuenta las restricciones para que las variables sean numeros enteros no negativos). Las ultimas 10 restricciones estan hechas para juntar el limite de stock y el maximo de elementos que se pueden comprar y que de esta forma el modelo permita incluir otro tipo de productos para comprar y otras restricciones de forma más fácil, para este caso en concreto se podria modelizar con solo 6 restricciones (como esta puesto en el archivo de calc).
+		\subsection{Modelo para el transporte}
+		En esta parte se pide minimizar el coste del transporte de una cantidad de toneladas en 2 rutas, para ello se dispone de los elementos que se han comprado en la parte anterior donde los contenedores y vagones tienen un limite dado por su tipo.
+			\subsubsection{Conjuntos}
+			Para expresar las variables de decision y los parametros con respecto a los elementos en especifico creamos varios conjuntos para asi poder tener bien controlado a que parametro se hace referencia:
+			\begin{align*}
+				contenedores\ tipos :=& \{ Cont20, Cont40 \} \\
+				contenedores_{Cont20} :=& \{ C1, C2, C3, C4 \} \\
+				contenedores_{Cont40} :=& \{ C5, C6, C7, C8 \} \\
+				contenedores todos :=& \bigcup_{ct}^{contenedores\ tipos} contenedores_{ct} \\
+				vagones\ tipos :=& \{ Vag1, Vag2 \} \\
+				vagones_{Vag1} :=& \{ V1, V2, V3 \} \\
+				vagones_{Vag2} :=& \{ V4, V5 \} \\
+				vagones todos :=& \bigcup_{vt}^{vagones\ tipos} vagones_{vt} \\
+				locomotoras :=& \{ L1, L2, L3 \} \\
+				rutas :=& \{ Madrid-Valencia, Madric-C\acute{a}diz \}
+			\end{align*}
+			\subsubsection{Variables de decisión}
+			Al tratarse de un ejercicio de programacin lineal de transporte, las variables son matrices binarias que representa la distribucion de los elementos de las filas entre los elementos de las columnas. Por los requisitos que pide el enunciado las matrices que se necesitan son las siguientes:
+			\begin{align*}
+				CV_{contenedores\ todos\ x\ vagones\ todos} :& Indica\ en\ que\ vagon\ va\ cada\ contenedor.\text{\footnotemark} \\
+				CR_{contenedores\ todos\ x\ rutas} :& Indica\ en\ que\ ruta\ va\ cada\ contenedor.\\
+				VR_{vagones\ todos\ x\ rutas} :& Indica\ en\ que\ ruta\ va\ cada\ vagon.\\
+				LR_{locomotoras\ x\ rutas} :& Indica\ en\ que\ ruta\ va\ cada\ locomotora.^1
+			\end{align*}
+			\footnotetext{Estas variables solo son necesarias porque el enunciado dice que se tienen que tener bien controladas donde va cada elemento, pero realmente si conoces que contenedores y que vagones van en una ruta, asignar los contenedores a los vagones es una tarea elemental, y con respecto a las locomotoras es aun más elemental ya que no hay restricciones en el enunciado luego se puede asumir que con una locomotora por ruta es suficiente.}
+
+			\subsubsection{Parametros}
+			Para el calculo de la funcion objetivo y las restricciones, se han sintetizado los datos del enunciado en los siguientes parámetros:
+			\begin{align*}
+				Distancia_r:& Distancia\ que\ tiene\ que\ recorrer\ un\ elemento\ en\ la\ ruta\ r.\\
+				&\forall r \in rutas\\
+				Mercancias_r:& Cantidad\ de\ mercancias\ que\ tiene\ que\ se\ tienen\ que\ trasladar\ en\ la\ ruta\ r.\\
+				&\forall r \in rutas\\
+				Traslado_{ct,r}:& Lo\ que\ cuesta\ trasladar\ un\ contenedor\ de\ tipo\ ct\ en\ la\ ruta\ r.\\
+				&\forall ct \in contenedores\ tipos, \forall r \in rutas \\
+				Limite\ Contenedor_{ct}:& La\ cantidad\ de\ mercancia\ que\ puede\ trasladar\ un\ contenedor\ de\ tipo\ ct.\\
+				&\forall ct \in contenedores\ tipos\\
+				Limite\ Vagon_{vt,ct}:& La\ cantidad\ de\ contenedores\ tipo\ ct\ que\ puede\ trasladar\ un\ vagon\ tipo\ vt.\\
+				&\forall vt \in vagones\ todos, \forall ct \in contenedores\ tipos\\
+			\end{align*}
+			\\
+			\begin{tabular}{ |c|c||c|c|  }
+				\hline
+				\multicolumn{2}{|c||}{}& Madrid-Valencia & Madrid-Cadiz \\
+				\hline
+				\multicolumn{2}{|c||}{Distancia} & 360 & 650\\
+				\multicolumn{2}{|c||}{Mercancias} & 90 & 150\\
+				\multirow{2}{*}{Traslado} & Cont20 & 10 & 15\\
+				& Cont40 & 20 & 30\\
+				\hline
+			\end{tabular}
+			\\
+			\\
+			\begin{tabular}{ |c|c||c|c|  }
+				\hline
+				\multicolumn{2}{|c||}{}& Cont20 & Cont40 \\
+				\hline
+				\multicolumn{2}{|c||}{Limite Contenedor} & 32 & 67\\
+				\multirow{2}{*}{Limite Vagon} & Vag1 & 2 & 0\\
+				& Vag2 & 2 & 1\\
+				\hline
+			\end{tabular}
+
+			\subsubsection{Funcion objetivo}
+			Para la funcion objetivo se pretende minimizar el coste de trasladar los contenedores en las rutas.
+			$$
+			minimizar\ coste = \sum_r^{rutas} \left( \sum_{ct}^{contenedores\ tipos} \left( \sum_c^{contenedores_{ct}} CR_{c,r} \right) * Traslado_{ct,r} \right) * Distancia_r
+			$$
+			\subsubsection{Restricciones}
+			El problema, por como esta presentado, presenta 3 restricciones muy claras; que se tienen que transportar cierta cantidad de mercancias en cada ruta (8), que las rutas cumplan los limites de contenedores que los vagones asignados a esa ruta le permitan(9) y que se tiene que evitar el uso innecesario de vagones(10). También, al tratarse de un problemade asignación, en nuestras variables, un elemento solo puede ser asignado a una cosa (15-18) y además se asume tiene que haber al menos una locomotora en cada ruta (14).\\
+			Para asegurarse de que la coherencia entre las variables CV, VR, y VR se restringe que los vagones cumplan los limites de contenedores que pueden trasladar (11), que se asignen a vagones los mismos contenedores que se asignan a rutas (12) y que, teniendo en cuenta esas otras dos restricciones, si un contenedor esta asignado a una vagon y un vagon esta asignado a una ruta, que el contenedor este asignado a esa ruta (13).\footnote{La forma mas directa de hacer esto es usar un and, sin embargo trasladar un and del mundo binario al entero lo convierte en una multiplicacion de variables por lo que deja de ser lineal, para solucionarlo se ha hecho una restriccion (13) que te garantiza: a=1 and b = 1 --> c = 1, pero si a o b es 0 no te garantiza que c sea 0, para completar esto y que así tenga la funcionalidad de una and se han usado otras 2 restricciones(11)(12).}
+			\begin{equation}
+				\sum_{ct}^{contenedores\ tipos}\left(\left( \sum_c^{contenedores{ct}} CR_{c,r} \right) * Limite\ Contenedor_{ct} \right) \geq  Mercancias_r;\ \forall r \in rutas
+			\end{equation}
+			\begin{equation}
+				\sum_c^{contenedores_{ct}} CR_{c,r} \leq \sum_{vt}^{vagones\ tipos} \left( \left(\sum_v^{vagones_{vt}}VR_{v,r}\right)*Limite\ Vagon_{vt,ct} \right);
+			\end{equation}
+			$$\forall r \in rutas,\forall ct \in contenedores\ tipos$$
+			\begin{equation}
+				-1+\sum_c^{contenedores\ todos} CR_{c,r} \geq \sum_v^{vagones\ todos} VR_{v,r};\ \forall r \in rutas
+			\end{equation}
+
+			\begin{equation}
+				\sum_c^{contenedores_{ct}}CV_{c,v} \leq Limite\ Vagon_{vt,ct};\ \forall vt \in vagones\ tipos, \forall v \in vagones_{vt}, \forall ct \in contenedores\ tipos
+			\end{equation}
+			\begin{equation}
+				\sum_r^{rutas} CR_{c,r} = \sum_v^{vagones\ todos} CV_{c,v};\ \forall c \in contenedores\ todos
+			\end{equation}
+			\begin{equation}
+				CR_{c,r}+CV_{c,v}-1<=VR_{v,r};\ \forall r \in rutas, \forall c \in contenedores\ todos, \forall v \in vagones\ todos
+			\end{equation}
+
+
+			\begin{equation}
+			\sum_l^{locomotoras}LR_{l,r} \geq 1;\ \forall r \in rutas
+			\end{equation}
+			\begin{equation}
+			\sum_r^{rutas}CR_{c,r} \leq 1;\ \forall c \in contenedores\ todos
+			\end{equation}
+			\begin{equation}
+			\sum_r^{rutas}VR_{v,r} \leq 1;\ \forall v \in vagones\ todos
+			\end{equation}
+			\begin{equation}
+			\sum_r^{rutas} LR_{l,r} \leq 1;\ \forall l \in locomotoras
+			\end{equation}
+			\begin{equation}
+			\sum_v^{vagones\ todos}CV_{c,v} \leq 1;\ \forall c \in contenedores\ todos
+			\end{equation}
+	\section{Analisis de los resultados}
+	\section{Conclusiones acerca de la práctica}
+	\newpage
+%------------------------------------------------------------------------------------------
+
+\end{document}

@@ -1,0 +1,395 @@
+Problem:    final
+Rows:       146
+Columns:    77 (77 integer, 72 binary)
+Non-zeros:  532
+Status:     INTEGER OPTIMAL
+Objective:  coste = 725160 (MINimum)
+
+   No.   Row name        Activity     Lower bound   Upper bound
+------ ------------    ------------- ------------- -------------
+     1 coste                 -158900                             
+     2 prioridadTiempo
+                                  18            17               
+     3 monopolio_1a           939312        884060               
+     4 monopolio_2a           961482                      972466 
+     5 SeCumpleStockPrimera[locomotoras]
+                                   2                           2 
+     6 SeCumpleStockPrimera[vagones1]
+                                   2                           3 
+     7 SeCumpleStockPrimera[vagones2]
+                                   0                           2 
+     8 SeCumpleStockPrimera[contenedores20]
+                                   3                           4 
+     9 SeCumpleStockPrimera[contenedores40]
+                                   2                           4 
+    10 SeCumpleStockSegunda[locomotoras]
+                                  -2                          -0 
+    11 SeCumpleStockSegunda[vagones1]
+                                  -2                          -0 
+    12 SeCumpleStockSegunda[vagones2]
+                                   0                          -0 
+    13 SeCumpleStockSegunda[contenedores20]
+                                  -3                          -2 
+    14 SeCumpleStockSegunda[contenedores40]
+                                  -2                          -1 
+    15 SatisfaceMercancias[MV]
+                                  96            90               
+    16 SatisfaceMercancias[MC]
+                                 166           150               
+    17 VagonesCumplenLimitesContenedores[Vag1,V1,Cont20]
+                                   2                           2 
+    18 VagonesCumplenLimitesContenedores[Vag1,V1,Cont40]
+                                   0                          -0 
+    19 VagonesCumplenLimitesContenedores[Vag1,V2,Cont20]
+                                   0                           2 
+    20 VagonesCumplenLimitesContenedores[Vag1,V2,Cont40]
+                                   0                          -0 
+    21 VagonesCumplenLimitesContenedores[Vag1,V3,Cont20]
+                                   1                           2 
+    22 VagonesCumplenLimitesContenedores[Vag1,V3,Cont40]
+                                   0                          -0 
+    23 VagonesCumplenLimitesContenedores[Vag2,V4,Cont20]
+                                   1                           2 
+    24 VagonesCumplenLimitesContenedores[Vag2,V4,Cont40]
+                                   1                           1 
+    25 VagonesCumplenLimitesContenedores[Vag2,V5,Cont20]
+                                   0                           2 
+    26 VagonesCumplenLimitesContenedores[Vag2,V5,Cont40]
+                                   1                           1 
+    27 EvitaUsoInnecesario[MV]
+                                   1             1               
+    28 EvitaUsoInnecesario[MC]
+                                   1             1               
+    29 RutaCumpleLimitesContenedores[MV,Cont20]
+                                  -1                          -0 
+    30 RutaCumpleLimitesContenedores[MV,Cont40]
+                                   0                          -0 
+    31 RutaCumpleLimitesContenedores[MC,Cont20]
+                                  -3                          -0 
+    32 RutaCumpleLimitesContenedores[MC,Cont40]
+                                   0                          -0 
+    33 CoherenciaTotalidadContenedores[C1]
+                                   0            -0             = 
+    34 CoherenciaTotalidadContenedores[C2]
+                                   0            -0             = 
+    35 CoherenciaTotalidadContenedores[C3]
+                                   0            -0             = 
+    36 CoherenciaTotalidadContenedores[C4]
+                                   0            -0             = 
+    37 CoherenciaTotalidadContenedores[C5]
+                                   0            -0             = 
+    38 CoherenciaTotalidadContenedores[C6]
+                                   0            -0             = 
+    39 CoherenciaTotalidadContenedores[C7]
+                                   0            -0             = 
+    40 CoherenciaTotalidadContenedores[C8]
+                                   0            -0             = 
+    41 Coherencia_CV_CR[MV,C1,V1]
+                                   1                           1 
+    42 Coherencia_CV_CR[MV,C1,V2]
+                                   1                           1 
+    43 Coherencia_CV_CR[MV,C1,V3]
+                                   0                           1 
+    44 Coherencia_CV_CR[MV,C1,V4]
+                                   1                           1 
+    45 Coherencia_CV_CR[MV,C1,V5]
+                                   1                           1 
+    46 Coherencia_CV_CR[MV,C2,V1]
+                                   0                           1 
+    47 Coherencia_CV_CR[MV,C2,V2]
+                                   1                           1 
+    48 Coherencia_CV_CR[MV,C2,V3]
+                                   1                           1 
+    49 Coherencia_CV_CR[MV,C2,V4]
+                                   1                           1 
+    50 Coherencia_CV_CR[MV,C2,V5]
+                                   1                           1 
+    51 Coherencia_CV_CR[MV,C3,V1]
+                                   1                           1 
+    52 Coherencia_CV_CR[MV,C3,V2]
+                                   1                           1 
+    53 Coherencia_CV_CR[MV,C3,V3]
+                                   0                           1 
+    54 Coherencia_CV_CR[MV,C3,V4]
+                                   1                           1 
+    55 Coherencia_CV_CR[MV,C3,V5]
+                                   1                           1 
+    56 Coherencia_CV_CR[MV,C4,V1]
+                                  -1                           1 
+    57 Coherencia_CV_CR[MV,C4,V2]
+                                   0                           1 
+    58 Coherencia_CV_CR[MV,C4,V3]
+                                  -1                           1 
+    59 Coherencia_CV_CR[MV,C4,V4]
+                                   1                           1 
+    60 Coherencia_CV_CR[MV,C4,V5]
+                                   0                           1 
+    61 Coherencia_CV_CR[MV,C5,V1]
+                                  -1                           1 
+    62 Coherencia_CV_CR[MV,C5,V2]
+                                   0                           1 
+    63 Coherencia_CV_CR[MV,C5,V3]
+                                  -1                           1 
+    64 Coherencia_CV_CR[MV,C5,V4]
+                                   1                           1 
+    65 Coherencia_CV_CR[MV,C5,V5]
+                                   0                           1 
+    66 Coherencia_CV_CR[MV,C6,V1]
+                                  -1                           1 
+    67 Coherencia_CV_CR[MV,C6,V2]
+                                   0                           1 
+    68 Coherencia_CV_CR[MV,C6,V3]
+                                  -1                           1 
+    69 Coherencia_CV_CR[MV,C6,V4]
+                                   0                           1 
+    70 Coherencia_CV_CR[MV,C6,V5]
+                                   1                           1 
+    71 Coherencia_CV_CR[MV,C7,V1]
+                                  -1                           1 
+    72 Coherencia_CV_CR[MV,C7,V2]
+                                   0                           1 
+    73 Coherencia_CV_CR[MV,C7,V3]
+                                  -1                           1 
+    74 Coherencia_CV_CR[MV,C7,V4]
+                                   0                           1 
+    75 Coherencia_CV_CR[MV,C7,V5]
+                                   0                           1 
+    76 Coherencia_CV_CR[MV,C8,V1]
+                                  -1                           1 
+    77 Coherencia_CV_CR[MV,C8,V2]
+                                   0                           1 
+    78 Coherencia_CV_CR[MV,C8,V3]
+                                  -1                           1 
+    79 Coherencia_CV_CR[MV,C8,V4]
+                                   0                           1 
+    80 Coherencia_CV_CR[MV,C8,V5]
+                                   0                           1 
+    81 Coherencia_CV_CR[MC,C1,V1]
+                                   1                           1 
+    82 Coherencia_CV_CR[MC,C1,V2]
+                                   0                           1 
+    83 Coherencia_CV_CR[MC,C1,V3]
+                                   0                           1 
+    84 Coherencia_CV_CR[MC,C1,V4]
+                                  -1                           1 
+    85 Coherencia_CV_CR[MC,C1,V5]
+                                  -1                           1 
+    86 Coherencia_CV_CR[MC,C2,V1]
+                                   0                           1 
+    87 Coherencia_CV_CR[MC,C2,V2]
+                                   0                           1 
+    88 Coherencia_CV_CR[MC,C2,V3]
+                                   1                           1 
+    89 Coherencia_CV_CR[MC,C2,V4]
+                                  -1                           1 
+    90 Coherencia_CV_CR[MC,C2,V5]
+                                  -1                           1 
+    91 Coherencia_CV_CR[MC,C3,V1]
+                                   1                           1 
+    92 Coherencia_CV_CR[MC,C3,V2]
+                                   0                           1 
+    93 Coherencia_CV_CR[MC,C3,V3]
+                                   0                           1 
+    94 Coherencia_CV_CR[MC,C3,V4]
+                                  -1                           1 
+    95 Coherencia_CV_CR[MC,C3,V5]
+                                  -1                           1 
+    96 Coherencia_CV_CR[MC,C4,V1]
+                                   1                           1 
+    97 Coherencia_CV_CR[MC,C4,V2]
+                                   1                           1 
+    98 Coherencia_CV_CR[MC,C4,V3]
+                                   1                           1 
+    99 Coherencia_CV_CR[MC,C4,V4]
+                                   1                           1 
+   100 Coherencia_CV_CR[MC,C4,V5]
+                                   0                           1 
+   101 Coherencia_CV_CR[MC,C5,V1]
+                                   1                           1 
+   102 Coherencia_CV_CR[MC,C5,V2]
+                                   1                           1 
+   103 Coherencia_CV_CR[MC,C5,V3]
+                                   1                           1 
+   104 Coherencia_CV_CR[MC,C5,V4]
+                                   1                           1 
+   105 Coherencia_CV_CR[MC,C5,V5]
+                                   0                           1 
+   106 Coherencia_CV_CR[MC,C6,V1]
+                                   1                           1 
+   107 Coherencia_CV_CR[MC,C6,V2]
+                                   1                           1 
+   108 Coherencia_CV_CR[MC,C6,V3]
+                                   1                           1 
+   109 Coherencia_CV_CR[MC,C6,V4]
+                                   0                           1 
+   110 Coherencia_CV_CR[MC,C6,V5]
+                                   1                           1 
+   111 Coherencia_CV_CR[MC,C7,V1]
+                                   0                           1 
+   112 Coherencia_CV_CR[MC,C7,V2]
+                                   0                           1 
+   113 Coherencia_CV_CR[MC,C7,V3]
+                                   0                           1 
+   114 Coherencia_CV_CR[MC,C7,V4]
+                                  -1                           1 
+   115 Coherencia_CV_CR[MC,C7,V5]
+                                  -1                           1 
+   116 Coherencia_CV_CR[MC,C8,V1]
+                                   0                           1 
+   117 Coherencia_CV_CR[MC,C8,V2]
+                                   0                           1 
+   118 Coherencia_CV_CR[MC,C8,V3]
+                                   0                           1 
+   119 Coherencia_CV_CR[MC,C8,V4]
+                                  -1                           1 
+   120 Coherencia_CV_CR[MC,C8,V5]
+                                  -1                           1 
+   121 alMenosUnaLocomotoraPorRuta[MV]
+                                   1             1               
+   122 alMenosUnaLocomotoraPorRuta[MC]
+                                   1             1               
+   123 unaRutaPorContenedor[C1]
+                                   1                           1 
+   124 unaRutaPorContenedor[C2]
+                                   1                           1 
+   125 unaRutaPorContenedor[C3]
+                                   1                           1 
+   126 unaRutaPorContenedor[C4]
+                                   1                           1 
+   127 unaRutaPorContenedor[C5]
+                                   1                           1 
+   128 unaRutaPorContenedor[C6]
+                                   1                           1 
+   129 unaRutaPorContenedor[C7]
+                                   0                           1 
+   130 unaRutaPorContenedor[C8]
+                                   0                           1 
+   131 unaRutaPorVagon[V1]
+                                   1                           1 
+   132 unaRutaPorVagon[V2]
+                                   0                           1 
+   133 unaRutaPorVagon[V3]
+                                   1                           1 
+   134 unaRutaPorVagon[V4]
+                                   1                           1 
+   135 unaRutaPorVagon[V5]
+                                   1                           1 
+   136 unaRutaPorLocomotora[L1]
+                                   1                           1 
+   137 unaRutaPorLocomotora[L2]
+                                   1                           1 
+   138 unaRutaPorLocomotora[L3]
+                                   0                           1 
+   139 unVagonPorContenedor[C1]
+                                   1                           1 
+   140 unVagonPorContenedor[C2]
+                                   1                           1 
+   141 unVagonPorContenedor[C3]
+                                   1                           1 
+   142 unVagonPorContenedor[C4]
+                                   1                           1 
+   143 unVagonPorContenedor[C5]
+                                   1                           1 
+   144 unVagonPorContenedor[C6]
+                                   1                           1 
+   145 unVagonPorContenedor[C7]
+                                   0                           1 
+   146 unVagonPorContenedor[C8]
+                                   0                           1 
+
+   No. Column name       Activity     Lower bound   Upper bound
+------ ------------    ------------- ------------- -------------
+     1 units[locomotoras]
+                    *              2             0               
+     2 units[vagones1]
+                    *              2             0               
+     3 units[vagones2]
+                    *              0             0               
+     4 units[contenedores20]
+                    *              3             0               
+     5 units[contenedores40]
+                    *              2             0               
+     6 CV[C1,V1]    *              1             0             1 
+     7 CV[C2,V1]    *              0             0             1 
+     8 CV[C3,V1]    *              1             0             1 
+     9 CV[C4,V1]    *              0             0             1 
+    10 CV[C5,V1]    *              0             0             1 
+    11 CV[C6,V1]    *              0             0             1 
+    12 CV[C7,V1]    *              0             0             1 
+    13 CV[C8,V1]    *              0             0             1 
+    14 CV[C1,V2]    *              0             0             1 
+    15 CV[C2,V2]    *              0             0             1 
+    16 CV[C3,V2]    *              0             0             1 
+    17 CV[C4,V2]    *              0             0             1 
+    18 CV[C5,V2]    *              0             0             1 
+    19 CV[C6,V2]    *              0             0             1 
+    20 CV[C7,V2]    *              0             0             1 
+    21 CV[C8,V2]    *              0             0             1 
+    22 CV[C1,V3]    *              0             0             1 
+    23 CV[C2,V3]    *              1             0             1 
+    24 CV[C3,V3]    *              0             0             1 
+    25 CV[C4,V3]    *              0             0             1 
+    26 CV[C5,V3]    *              0             0             1 
+    27 CV[C6,V3]    *              0             0             1 
+    28 CV[C7,V3]    *              0             0             1 
+    29 CV[C8,V3]    *              0             0             1 
+    30 CV[C1,V4]    *              0             0             1 
+    31 CV[C2,V4]    *              0             0             1 
+    32 CV[C3,V4]    *              0             0             1 
+    33 CV[C4,V4]    *              1             0             1 
+    34 CV[C5,V4]    *              1             0             1 
+    35 CV[C6,V4]    *              0             0             1 
+    36 CV[C7,V4]    *              0             0             1 
+    37 CV[C8,V4]    *              0             0             1 
+    38 CV[C1,V5]    *              0             0             1 
+    39 CV[C2,V5]    *              0             0             1 
+    40 CV[C3,V5]    *              0             0             1 
+    41 CV[C4,V5]    *              0             0             1 
+    42 CV[C5,V5]    *              0             0             1 
+    43 CV[C6,V5]    *              1             0             1 
+    44 CV[C7,V5]    *              0             0             1 
+    45 CV[C8,V5]    *              0             0             1 
+    46 CR[C1,MV]    *              1             0             1 
+    47 CR[C2,MV]    *              1             0             1 
+    48 CR[C3,MV]    *              1             0             1 
+    49 CR[C4,MV]    *              0             0             1 
+    50 CR[C5,MV]    *              0             0             1 
+    51 CR[C6,MV]    *              0             0             1 
+    52 CR[C7,MV]    *              0             0             1 
+    53 CR[C8,MV]    *              0             0             1 
+    54 CR[C1,MC]    *              0             0             1 
+    55 CR[C2,MC]    *              0             0             1 
+    56 CR[C3,MC]    *              0             0             1 
+    57 CR[C4,MC]    *              1             0             1 
+    58 CR[C5,MC]    *              1             0             1 
+    59 CR[C6,MC]    *              1             0             1 
+    60 CR[C7,MC]    *              0             0             1 
+    61 CR[C8,MC]    *              0             0             1 
+    62 VR[V1,MV]    *              1             0             1 
+    63 VR[V2,MV]    *              0             0             1 
+    64 VR[V3,MV]    *              1             0             1 
+    65 VR[V4,MV]    *              0             0             1 
+    66 VR[V5,MV]    *              0             0             1 
+    67 VR[V1,MC]    *              0             0             1 
+    68 VR[V2,MC]    *              0             0             1 
+    69 VR[V3,MC]    *              0             0             1 
+    70 VR[V4,MC]    *              1             0             1 
+    71 VR[V5,MC]    *              1             0             1 
+    72 LR[L1,MV]    *              1             0             1 
+    73 LR[L2,MV]    *              0             0             1 
+    74 LR[L3,MV]    *              0             0             1 
+    75 LR[L1,MC]    *              0             0             1 
+    76 LR[L2,MC]    *              1             0             1 
+    77 LR[L3,MC]    *              0             0             1 
+
+Integer feasibility conditions:
+
+KKT.PE: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+KKT.PB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+End of output

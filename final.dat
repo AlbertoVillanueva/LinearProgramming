@@ -1,0 +1,88 @@
+data;
+/* Productos a comprar en la fabrica 1*/
+set PRODUCTOS := locomotoras vagones1 vagones2 contenedores20 contenedores40;
+
+/*Tipos de contenedores*/
+set CONTENEDORES_TIPOS := Cont20 Cont40;
+/*Todos los contenedores*/
+set CONTENEDORES_TODOS := C1 C2 C3 C4 C5 C6 C7 C8;
+/*Contenedores ordenados por tipos*/
+set CONTENEDORES[Cont20] := C1 C2 C3 C4;
+set CONTENEDORES[Cont40] := C5 C6 C7 C8;
+/*Tipos de vagones*/
+set VAGONES_TIPOS := Vag1 Vag2;
+/*Todos los vagones*/
+set VAGONES_TODOS := V1 V2 V3 V4 V5;
+/*Vagones ordenados por tipos*/
+set VAGONES[Vag1] := V1 V2 V3;
+set VAGONES[Vag2] := V4 V5;
+/*Locomotoras*/
+set LOCOMOTORAS := L1 L2 L3;
+/*Rutas*/
+set RUTAS := Madrid-Valencia Madrid-Cadiz;
+
+/*parametros*/
+
+/*Necesidad de articulos que se tienen que satisfacer*/
+param Necesidad :=
+locomotoras	3
+vagones1	3
+vagones2	2
+contenedores20	4
+contenedores40	4;
+
+/*Limite de productos que puede satisfacer cada fabrica*/
+param StockPrimera :=
+locomotoras	2
+vagones1	3
+vagones2	2
+contenedores20	4
+contenedores40	4;
+
+param StockSegunda :=
+locomotoras	3
+vagones1	3
+vagones2	2
+contenedores20	2
+contenedores40	3;
+
+/*Coste de comprar un producto en una fabrica(con precio de compra y traslado incluido)*/
+param CostePrimera :=
+locomotoras 100200
+vagones1	10500
+vagones2	20040
+contenedores20	20080
+contenedores40	30040;
+
+param CosteSegunda :=
+locomotoras	200220
+vagones1	3440
+vagones2	5660
+contenedores20	25220
+contenedores40	40220;
+
+/*Distancia que tiene que se tiene que recorrer en cada ruta*/
+param Distancia:=
+	Madrid-Valencia	360
+	Madrid-Cadiz	650;
+
+/*Mercancias que se tienen que mover en cada ruta*/
+param Mercancias:=
+	Madrid-Valencia	90
+	Madrid-Cadiz	150;
+
+/*Coste de trasladar un contenedor 1km en una ruta*/
+param Traslado: Madrid-Valencia Madrid-Cadiz :=
+		Cont20		10				20
+		Cont40		15				30;
+
+/*Numero de contenedores tipo c que puede transportar un vagon de tipo v*/
+param LimiteVagon: Cont20 Cont40:=
+			Vag1	2 		0
+			Vag2	2 		1;
+
+/*Limite de cargamento que puede mover cada contenedor*/
+param LimiteContenedor:=
+	Cont20	32
+	Cont40	67;
+end;
