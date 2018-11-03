@@ -13,6 +13,7 @@
 \usepackage{babel}
 \usepackage{hyperref}
 \usepackage{multirow}
+\usepackage{caption}
 
 \hypersetup{
     colorlinks,
@@ -124,17 +125,19 @@
 			Coste\ Segunda_p:& Coste\ de\ comprar\ y\ transportar\ un\ elemento\ p\ de\ la\ segunda fabrica\ al\ destino. \\
 			&\forall p \in productos 
 			\end{align*}
-			\begin{tabular}{ |c||c|c|c|c|c|  }
-			 \hline
-			 \multirow{2}{*}{Parametro} & \multirow{2}{*}{Locomotoras} &  \multicolumn{2}{|c|}{Vagones} & \multicolumn{2}{|c|}{Contenedores} \\
-			 & & Tipo 1 & Tipo 2 & 20' & 40'\\
-			 \hline
-			 Necesidad & 3 & 3 & 2 & 4 & 4 \\
-			 Stock Primera & 2 & 3 & 2 & 4 & 4 \\
-			 Stock Segunda & 3 & 3 & 2 & 2 & 3 \\
- 			 Coste Primera & 100200 & 10500 & 20040 & 20080 & 30040 \\
-			 Coste Segunda & 200220 & 3440 & 5660 & 25220 & 40220 \\
-			 \hline
+			\captionof{table}{Parametros de compra}
+			\label{tab:params1}
+			\begin{tabular}{ |c||c|c|c|c|c|  }	
+			 	\hline
+			 	\multirow{2}{*}{Parametro} & \multirow{2}{*}{Locomotoras} &  \multicolumn{2}{|c|}{Vagones} & \multicolumn{2}{|c|}{Contenedores} \\
+			 	& & Tipo 1 & Tipo 2 & 20' & 40'\\
+			 	\hline
+			 	Necesidad & 3 & 3 & 2 & 4 & 4 \\
+			 	Stock Primera & 2 & 3 & 2 & 4 & 4 \\
+			 	Stock Segunda & 3 & 3 & 2 & 2 & 3 \\
+ 			 	Coste Primera & 100200 & 10500 & 20040 & 20080 & 30040 \\
+			 	Coste Segunda & 200220 & 3440 & 5660 & 25220 & 40220 \\
+				\hline
 			\end{tabular}
 
 			\subsubsection{Funcion objetivo}
@@ -143,27 +146,34 @@
 			minimizar\ coste = \sum_p^{productos} (x_p * Coste Primera_p + (Necesidad_p - x_p) * Coste Segunda_p)
 			$$
 			\subsubsection{Restricciones}
-			El problema de optimizacion esta restringido con que las variables sean no negativas (1) enteras (2), que se compren mas productos en la primera fabrica que en la segunda (3), que el precio gastado en cada fabrica no supere en un 10\% al gastado en al otra (4)(5) y que los productos que se compren en cada una de las fabricas esten dentro del limite que tenga esa fabrica (5)(7).
+			El problema de optimizacion esta restringido con que las variables sean no negativas (\ref{eq:numeroNoNegativo}) enteras (\ref{eq:numeroEntero}), que se compren mas productos en la primera fabrica que en la segunda (\ref{eq:prioridadTiempo}), que el precio gastado en cada fabrica no supere en un 10\% al gastado en al otra (\ref{eq:monopolio_1a})(\ref{eq:monopolio_2a}) y que los productos que se compren en cada una de las fabricas esten dentro del limite que tenga esa fabrica (\ref{eq:SeCumpleStockPrimera})(\ref{eq:SeCumpleStockSegunda}).
 			\begin{equation}
-			x_p \geq 0, \forall p \in productos
+				\label{eq:numeroNoNegativo}
+				x_p \geq 0, \forall p \in productos
 			\end{equation}
 			\begin{equation}
-			x_p \in \mathbb{Z} , \forall p \in productos
+				\label{eq:numeroEntero}
+				x_p \in \mathbb{Z} , \forall p \in productos
 			\end{equation}
 			\begin{equation}
-			-1 + \sum_p^{productos} x_p > \sum_p^productos (Necesidad_p - x_p)
+				\label{eq:prioridadTiempo}
+				-1 + \sum_p^{productos} x_p > \sum_p^productos (Necesidad_p - x_p)
 			\end{equation}
 			\begin{equation}
-			1.1*\sum_p^{productos} x_p*CostePrimera_p \geq \sum_p^{productos} (Necesidad_p - x_p)*CosteSegunda_p
+				\label{eq:monopolio_1a}
+				1.1*\sum_p^{productos} x_p*CostePrimera_p \geq \sum_p^{productos} (Necesidad_p - x_p)*CosteSegunda_p
 			\end{equation}
 			\begin{equation}
-			\sum_p^{productos} x_p*CostePrimera_p \leq 1.1*\sum_p^{productos} (Necesidad_p - x_p)*CosteSegunda_p
+				\label{eq:monopolio_2a}
+				\sum_p^{productos} x_p*CostePrimera_p \leq 1.1*\sum_p^{productos} (Necesidad_p - x_p)*CosteSegunda_p
 			\end{equation}
 			\begin{equation}
-			x_p \leq StockPrimera_p, \forall p \in productos
+				\label{eq:SeCumpleStockPrimera}
+				x_p \leq StockPrimera_p, \forall p \in productos
 			\end{equation}
 			\begin{equation}
-			Necesidad - x_p \leq StockSegunda_p, \forall p \in productos
+				\label{eq:SeCumpleStockSegunda}
+				Necesidad - x_p \leq StockSegunda_p, \forall p \in productos
 			\end{equation}
 		\subsection{Modelo para el transporte}
 		En esta parte se pide minimizar el coste del transporte de una cantidad de toneladas en 2 rutas, para ello se dispone de los elementos que se han comprado en la parte anterior donde los contenedores y vagones tienen un limite dado por su tipo.
@@ -206,6 +216,8 @@
 				&\forall vt \in vagones\ todos, \forall ct \in contenedores\ tipos\\
 			\end{align*}
 			\\
+			\captionof{table}{Parametros de asignacion. Rutas}
+			\label{tab:params2rut}
 			\begin{tabular}{ |c|c||c|c|  }
 				\hline
 				\multicolumn{2}{|c||}{}& Madrid-Valencia & Madrid-Cadiz \\
@@ -218,6 +230,8 @@
 			\end{tabular}
 			\\
 			\\
+			\captionof{table}{Parametros de asignacion. Contenedores}
+			\label{tab:params2cont}
 			\begin{tabular}{ |c|c||c|c|  }
 				\hline
 				\multicolumn{2}{|c||}{}& Cont20 & Cont40 \\
@@ -234,54 +248,137 @@
 			minimizar\ coste = \sum_r^{rutas} \left( \sum_{ct}^{contenedores\ tipos} \left( \sum_c^{contenedores_{ct}} CR_{c,r} \right) * Traslado_{ct,r} \right) * Distancia_r
 			$$
 			\subsubsection{Restricciones}
-			El problema, por como esta presentado, presenta 3 restricciones muy claras; que se tienen que transportar cierta cantidad de mercancias en cada ruta (8), que las rutas cumplan los limites de contenedores que los vagones asignados a esa ruta le permitan(9) y que se tiene que evitar el uso innecesario de vagones(10). También, al tratarse de un problemade asignación, en nuestras variables, un elemento solo puede ser asignado a una cosa (15-18) y además se asume tiene que haber al menos una locomotora en cada ruta (14).\\
-			Para asegurarse de que la coherencia entre las variables CV, VR, y VR se restringe que los vagones cumplan los limites de contenedores que pueden trasladar (11), que se asignen a vagones los mismos contenedores que se asignan a rutas (12) y que, teniendo en cuenta esas otras dos restricciones, si un contenedor esta asignado a una vagon y un vagon esta asignado a una ruta, que el contenedor este asignado a esa ruta (13).\footnote{La forma mas directa de hacer esto es usar un and, sin embargo trasladar un and del mundo binario al entero lo convierte en una multiplicacion de variables por lo que deja de ser lineal, para solucionarlo se ha hecho una restriccion (13) que te garantiza: a=1 and b = 1 --> c = 1, pero si a o b es 0 no te garantiza que c sea 0, para completar esto y que así tenga la funcionalidad de una and se han usado otras 2 restricciones(11)(12).}
+			El problema, por como esta presentado, presenta 3 restricciones muy claras; que se tienen que transportar cierta cantidad de mercancias en cada ruta (\ref{eq:SatisfaceMercancias}), que las rutas cumplan los limites de contenedores que los vagones asignados a esa ruta le permitan(\ref{eq:RutaCumpleLimitesContenedores}) y que se tiene que evitar el uso innecesario de vagones(\ref{eq:EvitaUsoInnecesario}). También, al tratarse de un problemade asignación, en nuestras variables, un elemento solo puede ser asignado a una cosa (\ref{eq:unaRutaPorContenedor}-\ref{eq:unVagonPorContenedor}) y además se asume tiene que haber al menos una locomotora en cada ruta (\ref{eq:alMenosUnaLocomotoraPorRuta}).\\
+			Para asegurarse de que la coherencia entre las variables CV, VR, y VR se restringe que los vagones cumplan los limites de contenedores que pueden trasladar (\ref{eq:VagonesCumplenLimitesContenedores}), que se asignen a vagones los mismos contenedores que se asignan a rutas (\ref{eq:CoherenciaTotalidadContenedores}) y que, teniendo en cuenta esas otras dos restricciones, si un contenedor esta asignado a una vagon y un vagon esta asignado a una ruta, que el contenedor este asignado a esa ruta (\ref{eq:Coherencia_CV_CR}).\footnote{La forma mas directa de hacer esto es usar un and, sin embargo trasladar un and del mundo binario al entero lo convierte en una multiplicacion de variables por lo que deja de ser lineal, para solucionarlo se ha hecho una restriccion (\ref{eq:Coherencia_CV_CR}) que te garantiza: a=1 and b = 1 --> c = 1, pero si a o b es 0 no te garantiza que c sea 0, para completar esto y que así tenga la funcionalidad de una and se han usado otras 2 restricciones(\ref{eq:VagonesCumplenLimitesContenedores})(\ref{eq:CoherenciaTotalidadContenedores}).}
+			$$
+				CV_{c,v},CR_{c,r},VR_{v,r},LR_{l,r} \in \mathbb{Z}_2
+			$$
 			\begin{equation}
-				\sum_{ct}^{contenedores\ tipos}\left(\left( \sum_c^{contenedores{ct}} CR_{c,r} \right) * Limite\ Contenedor_{ct} \right) \geq  Mercancias_r;\ \forall r \in rutas
+				\forall c \in contenedores\ todos, \forall v \in vagones\ todos, \forall l \in locomotoras, \forall r \in rutas	
 			\end{equation}
+			$$
+				\sum_{ct}^{contenedores\ tipos}\left(\left( \sum_c^{contenedores{ct}} CR_{c,r} \right) * Limite\ Contenedor_{ct} \right) \geq  Mercancias_r;
+			$$
 			\begin{equation}
+				\label{eq:SatisfaceMercancias}
+				\forall r \in rutas
+			\end{equation}
+			$$
 				\sum_c^{contenedores_{ct}} CR_{c,r} \leq \sum_{vt}^{vagones\ tipos} \left( \left(\sum_v^{vagones_{vt}}VR_{v,r}\right)*Limite\ Vagon_{vt,ct} \right);
-			\end{equation}
-			$$\forall r \in rutas,\forall ct \in contenedores\ tipos$$
+			$$
 			\begin{equation}
+				\label{eq:RutaCumpleLimitesContenedores}
+				\forall r \in rutas,\forall ct \in contenedores\ tipos
+			\end{equation}
+			
+			\begin{equation}
+				\label{eq:EvitaUsoInnecesario}
 				-1+\sum_c^{contenedores\ todos} CR_{c,r} \geq \sum_v^{vagones\ todos} VR_{v,r};\ \forall r \in rutas
 			\end{equation}
-
+			$$
+			\sum_c^{contenedores_{ct}}CV_{c,v} \leq Limite\ Vagon_{vt,ct};
+			$$
 			\begin{equation}
-				\sum_c^{contenedores_{ct}}CV_{c,v} \leq Limite\ Vagon_{vt,ct};\ \forall vt \in vagones\ tipos, \forall v \in vagones_{vt}, \forall ct \in contenedores\ tipos
+				\label{eq:VagonesCumplenLimitesContenedores}
+				\ \forall vt \in vagones\ tipos, \forall v \in vagones_{vt}, \forall ct \in contenedores\ tipos
 			\end{equation}
 			\begin{equation}
+				\label{eq:CoherenciaTotalidadContenedores}
 				\sum_r^{rutas} CR_{c,r} = \sum_v^{vagones\ todos} CV_{c,v};\ \forall c \in contenedores\ todos
 			\end{equation}
 			\begin{equation}
+				\label{eq:Coherencia_CV_CR}
 				CR_{c,r}+CV_{c,v}-1<=VR_{v,r};\ \forall r \in rutas, \forall c \in contenedores\ todos, \forall v \in vagones\ todos
 			\end{equation}
 
 
 			\begin{equation}
-			\sum_l^{locomotoras}LR_{l,r} \geq 1;\ \forall r \in rutas
+				\label{eq:alMenosUnaLocomotoraPorRuta}
+				\sum_l^{locomotoras}LR_{l,r} \geq 1;\ \forall r \in rutas
 			\end{equation}
 			\begin{equation}
-			\sum_r^{rutas}CR_{c,r} \leq 1;\ \forall c \in contenedores\ todos
+				\label{eq:unaRutaPorContenedor}
+				\sum_r^{rutas}CR_{c,r} \leq 1;\ \forall c \in contenedores\ todos
 			\end{equation}
 			\begin{equation}
-			\sum_r^{rutas}VR_{v,r} \leq 1;\ \forall v \in vagones\ todos
+				\label{eq:unaRutaPorVagon}
+				\sum_r^{rutas}VR_{v,r} \leq 1;\ \forall v \in vagones\ todos
 			\end{equation}
 			\begin{equation}
-			\sum_r^{rutas} LR_{l,r} \leq 1;\ \forall l \in locomotoras
+				\label{eq:unaRutaPorLocomotora}
+				\sum_r^{rutas} LR_{l,r} \leq 1;\ \forall l \in locomotoras
 			\end{equation}
 			\begin{equation}
-			\sum_v^{vagones\ todos}CV_{c,v} \leq 1;\ \forall c \in contenedores\ todos
+				\label{eq:unVagonPorContenedor}
+				\sum_v^{vagones\ todos}CV_{c,v} \leq 1;\ \forall c \in contenedores\ todos
 			\end{equation}
 			
 		\subsection{Programacion Dinamica}
 	\section{Analisis de los resultados}
 		\subsection{Describir la solucion y analizar que restricciones limitan el problema}
+			\subsubsection{Solucion}
+			\begin{tabbing}
+			Prod\=uctos comprados en la Fabrica 1:\\
+			\>	locomotoras: 2\\
+			\>	vagones1: 2\\
+			\>	vagones2: 0\\
+			\>	contenedores20: 3\\
+			\>	contenedores40: 2\\
+			Productos comprados en la Fabrica 2:\\
+			\>	locomotoras: 1\\
+			\>	vagones1: 1\\
+			\>	vagones2: 2\\
+			\>	contenedores20: 1\\
+			\>	contenedores40: 2\\
+			Disposición de contenedores en vagones:\\
+			\>	C1 --> V1\\
+			\>	C2 --> V2\\
+			\>	C3 --> V1\\
+			\>	C4 --> V4\\
+			\>	C5 --> V4\\
+			\>	C6 --> V5\\
+			\>	C7 --> No Asignado\\
+			\>	C8 --> No Asignado\\
+			Disposición de contenedores en rutas:\\
+			\>	C1 --> Madrid-Valencia\\
+			\>	C2 --> Madrid-Valencia\\
+			\>	C3 --> Madrid-Valencia\\
+			\>	C4 --> Madrid-Cadiz\\
+			\>	C5 --> Madrid-Cadiz\\
+			\>	C6 --> Madrid-Cadiz\\
+			\>	C7 --> No Asignado\\
+			\>	C8 --> No Asignado\\
+			Disposición de vagones en rutas:\\
+			\>	V1 --> Madrid-Valencia\\
+			\>	V2 --> Madrid-Valencia\\
+			\>	V3 --> No Asignado\\
+			\>	V4 --> Madrid-Cadiz\\
+			\>	V5 --> Madrid-Cadiz\\
+			Disposición de locomotoras en rutas:\\
+			\>	L1 --> Madrid-Valencia\\
+			\>	L2 --> Madrid-Cadiz\\
+			\>	L3 --> No Asignado\\
+			Coste Minimizado de la compra: 662360\\
+			Coste Minimizado del traslado: 62800\\
+			Coste Minimizado total       : 725160\\
+			\end{tabbing}
+			\subsubsection{Cumplimiento de restricciones}
+			En la primera fabrica se compran 9 productos y en la fabrica 2 se compran 7 luego se compran más en la fabrica que esta mas cerca.\\
+			En la primera fabrica, el precio total de las compras es de 341720 y en la segunda de 320640 luego evita que alguna fabrica tenga monopolio.\\
+			Mirando el cuadro \ref{tab:params1} se puede comprobar que no se supera el limite permitido por ninguna fabrica.\\
+			Segun los contenedores asignados a rutas, se pueden llevar 96 y 166 toneladas respectivamente a la ruta de Madrid-Valencia y Madrid-Cadiz luego se satisfacen la cantidad de mercancias que se tienen que transportar.\\
+			Mirando el cuadro \ref{tab:params2cont} y la asignacion de contenedores a vagones se ve que no se supera el limite que cada tipo de vagon permite.\\
+			En ambas rutas se usan 2 vagones y 3 contenedores luego se evita el uso innecesario.
+			\subsubsection{Restricciones que limitan el problema}
+			En el problema de la compra, el limite de stock no cambia en nada a no ser que el stock de la fabrica que tiene el producto mas barato no tenga suficiente como para suministrar la necesidad, la prioridad de tiempo tiene un ligero impacto pero no muy grande y el que mas impacto tiene es evitar el monopolio (quitando esa restriccion el coste de la compra pasa de 662360 a 622740) ya que se obliga a comprar productos mas caros para que el balance se mantenga.
+			En el problema de la asignacion, la restriccion de los limites que tienen los vagones afecta un poco (ya que usar contenedores de 40' es mas eficiente que los de 20' segun lo que cuesta trasladarlos) y la restriccion de usar mas contenedores que vagones no afecta en nada pero la que realmente afecta, claramente, es la carga que se tiene que trasladar, ya que si no se tiene que trasladar nada hay que usar menos contenedores (se siguie teniendo que usar algunos por la restriccion de usar mas contenedores que vagones y 0 no es mayor que 0 luego se tienen que usar contenedores y suficientes vagones para llevarlos)
 		\subsection{Analisis de complejidad}
+		Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 5 variables y 13 restricciones (sin tener en cuenta las restricciones para que las variables sean numeros enteros no negativos). Las ultimas 10 restricciones estan hechas para juntar el limite de stock y el maximo de elementos que se pueden comprar y que de esta forma el modelo permita incluir otro tipo de productos para comprar y otras restricciones de forma más fácil, para este caso en concreto se podria modelizar con solo 7 restricciones (como esta puesto en el archivo de calc).\\
+		Teniendo en cuenta las restricciones de stock, el problema puede tomar $3^3+4^2$, es decir, 43 posibles valores.
+		Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 72 variables binarias, es decir, que hay $2^{72}$, es decir $4.7*10^{21}$posibles valores que pueden tomar nuestro resultado, y con 96 restricciones (sin tener en cuenta las que limitan a que las variables sean binarias).
 		\subsection{Cuestiones}
 		\subsection{Ventajas y desventajas de calc}
-		Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 5 variables y 13 restricciones (sin tener en cuenta las restricciones para que las variables sean numeros enteros no negativos). Las ultimas 10 restricciones estan hechas para juntar el limite de stock y el maximo de elementos que se pueden comprar y que de esta forma el modelo permita incluir otro tipo de productos para comprar y otras restricciones de forma más fácil, para este caso en concreto se podria modelizar con solo 6 restricciones (como esta puesto en el archivo de calc).\\
-		Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 72 variables binarias, es decir, que hay $2^{72}$ posibles valores que pueden tomar nuestro resultado, y con 96 restricciones (sin tener en cuenta las que limitan a que las variables sean binarias).
+		
 	\section{Conclusiones acerca de la práctica}
 	\newpage
 %------------------------------------------------------------------------------------------

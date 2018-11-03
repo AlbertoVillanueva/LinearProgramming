@@ -75,7 +75,7 @@ s.t. SeCumpleStockSegunda {p in PRODUCTOS}: Necesidad[p]-units[p] <= StockSegund
 
 s.t. SatisfaceMercancias {r in RUTAS}: sum{ct in CONTENEDORES_TIPOS}(sum{c in CONTENEDORES[ct]}CR[c,r])*LimiteContenedor[ct] >= Mercancias[r];
 s.t. RutaCumpleLimitesContenedores {r in RUTAS,ct in CONTENEDORES_TIPOS}: sum{c in CONTENEDORES[ct]}CR[c,r]<=sum{vt in VAGONES_TIPOS}(sum{v in VAGONES[vt]}VR[v,r])*LimiteVagon[vt,ct];
-s.t. EvitaUsoInnecesario {r in RUTAS}: -1+sum{c in CONTENEDORES_TODOS}CR[c,r]>=sum{v in VAGONES_TODOS}VR[v,r];
+#s.t. EvitaUsoInnecesario {r in RUTAS}: -1+sum{c in CONTENEDORES_TODOS}CR[c,r]>=sum{v in VAGONES_TODOS}VR[v,r];
 
 
 s.t. VagonesCumplenLimitesContenedores {vt in VAGONES_TIPOS, v in VAGONES[vt], ct in CONTENEDORES_TIPOS}: sum{c in CONTENEDORES[ct]}CV[c,v] <= LimiteVagon[vt,ct];
@@ -104,21 +104,21 @@ for{c in CONTENEDORES_TODOS}
 	printf {1..1: sum{v in VAGONES_TODOS} CV[c,v] == 0}: "\t%s --> No Asignado\n",c >> "res.txt";
 }
 
-printf "Disposición de contenedores en rutas:\n" >> "res.txt";
+printf "\nDisposición de contenedores en rutas:\n" >> "res.txt";
 for{c in CONTENEDORES_TODOS}
 {
 	printf{r in RUTAS: CR[c,r]}: "\t%s --> %s\n",c,r >> "res.txt";	
 	printf {1..1: sum{r in RUTAS} CR[c,r] == 0}: "\t%s --> No Asignado\n",c >> "res.txt";
 }
 
-printf "Disposición de vagones en rutas:\n" >> "res.txt";
+printf "\nDisposición de vagones en rutas:\n" >> "res.txt";
 for{v in VAGONES_TODOS}
 {
 	printf {r in RUTAS: VR[v,r]}:"\t%s --> %s\n",v,r >> "res.txt";
 	printf {1..1: sum{r in RUTAS} VR[v,r] == 0}: "\t%s --> No Asignado\n",v >> "res.txt";
 }
 
-printf "Disposición de locomotoras en rutas:\n" >> "res.txt";
+printf "\nDisposición de locomotoras en rutas:\n" >> "res.txt";
 for{l in LOCOMOTORAS}
 {
 	printf {r in RUTAS: LR[l,r]}: "\t%s --> %s\n",l,r >> "res.txt";
