@@ -1,0 +1,1 @@
+python dinamica.py $1
