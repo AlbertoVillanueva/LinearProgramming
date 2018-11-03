@@ -96,7 +96,7 @@
 
 %------------------------------------------------------------------------------------------
 	\section{Intorducción}
-	En este documento se explican los modelos de los ejercicios de programación lineal y dinamica, en los de lineal explicando que representa cada conjunto, variable, y restriccion. A continuación se analizan los resultados de los modelos, su complejudad y las ventajas y desventajas de usar calc repecto a math prog y finalmente se procede a la conclusion de la práctica.
+	En este documento se explican los modelos de los ejercicios de programación lineal y dinamica, en los de lineal explicando que representa cada conjunto, variable, y restriccion. A continuación se analizan los resultados de los modelos, su complejudad y las ventajas y desventajas de usar calc repecto a GLPK y finalmente se procede a la conclusion de la práctica.
 
 	\section{Descripción de los modelos}
 		\subsection{Modelo para la compra}
@@ -375,8 +375,18 @@
 		\subsection{Analisis de complejidad}
 		Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 5 variables y 13 restricciones (sin tener en cuenta las restricciones para que las variables sean numeros enteros no negativos). Las ultimas 10 restricciones estan hechas para juntar el limite de stock y el maximo de elementos que se pueden comprar y que de esta forma el modelo permita incluir otro tipo de productos para comprar y otras restricciones de forma más fácil, para este caso en concreto se podria modelizar con solo 7 restricciones (como esta puesto en el archivo de calc).\\
 		Teniendo en cuenta las restricciones de stock, el problema puede tomar $3^3+4^2$, es decir, 43 posibles valores.
-		Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 72 variables binarias, es decir, que hay $2^{72}$, es decir $4.7*10^{21}$posibles valores que pueden tomar nuestro resultado, y con 96 restricciones (sin tener en cuenta las que limitan a que las variables sean binarias).
+		Teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 72 variables binarias, es decir, que hay $2^{72}$, es decir $4.7*10^{21}$ posibles valores que pueden tomar nuestro resultado, y con 96 restricciones (sin tener en cuenta las que limitan a que las variables sean binarias).
 		\subsection{Cuestiones}
+			\subsubsection{Composicion final}
+			\begin{tabbing}
+			Madr\=id-Valencia: C1-C3->V1-C2->V2\_L1\\
+			\>Contenedores: 3\\
+			\>Vagones: 2\\
+			Madrid-Cadiz: C4-C5->V4-C6->V5\_L2\\
+			\>Contenedores: 3\\
+			\>Vagones: 2
+			\end{tabbing}
+			\subsubsection{Mejor tipo de Vagon}
 		\subsection{Ventajas y desventajas de calc}
 		
 	\section{Conclusiones acerca de la práctica}
