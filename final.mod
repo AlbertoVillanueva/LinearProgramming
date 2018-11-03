@@ -75,7 +75,7 @@ s.t. SeCumpleStockSegunda {p in PRODUCTOS}: Necesidad[p]-units[p] <= StockSegund
 
 s.t. SatisfaceMercancias {r in RUTAS}: sum{ct in CONTENEDORES_TIPOS}(sum{c in CONTENEDORES[ct]}CR[c,r])*LimiteContenedor[ct] >= Mercancias[r];
 s.t. RutaCumpleLimitesContenedores {r in RUTAS,ct in CONTENEDORES_TIPOS}: sum{c in CONTENEDORES[ct]}CR[c,r]<=sum{vt in VAGONES_TIPOS}(sum{v in VAGONES[vt]}VR[v,r])*LimiteVagon[vt,ct];
-#s.t. EvitaUsoInnecesario {r in RUTAS}: -1+sum{c in CONTENEDORES_TODOS}CR[c,r]>=sum{v in VAGONES_TODOS}VR[v,r];
+s.t. EvitaUsoInnecesario {r in RUTAS}: -1+sum{c in CONTENEDORES_TODOS}CR[c,r]>=sum{v in VAGONES_TODOS}VR[v,r];
 
 
 s.t. VagonesCumplenLimitesContenedores {vt in VAGONES_TIPOS, v in VAGONES[vt], ct in CONTENEDORES_TIPOS}: sum{c in CONTENEDORES[ct]}CV[c,v] <= LimiteVagon[vt,ct];
