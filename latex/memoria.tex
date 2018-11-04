@@ -62,12 +62,12 @@
 	%	Author(s)	%
 	%---------------%
 	
-	\begin{minipage}{0.6\textwidth}
+	\begin{minipage}{0.7\textwidth}
 		\begin{flushleft}
 			\large
 			\textit{Autores}\\
-			\textsc{Alberto Villanueva Nieto}\\
-            \textsc{Cristian Cabrera Pinto}
+			\textsc{Alberto Villanueva Nieto\ \ \ \ 100374691}\\
+            \textsc{Cristian Cabrera Pinto\ \ \ \ \ \ \ \ \ \ 100363778}
 		\end{flushleft}
 	\end{minipage}
 
@@ -383,19 +383,19 @@
 			En el problema de la compra, el límite de stock no cambia en nada a no ser que el stock de la fábrica que tiene el producto más barato no tenga suficiente como para suministrar la necesidad, la prioridad de tiempo tiene un ligero impacto pero no muy grande y el que más impacto tiene es evitar el monopolio (quitando esa restricción el coste de la compra pasa de 662360 a 622740) ya que se obliga a comprar productos más caros para que el balance se mantenga.
 			En el problema de la asignación, la restricción de los límites que tienen los vagones afecta un poco (ya que usar contenedores de 40' es más eficiente que los de 20' segun lo que cuesta trasladarlos) y la restricción de usar más contenedores que vagones no afecta en nada pero la que realmente afecta, claramente, es la carga que se tiene que trasladar, ya que si no se tiene que trasladar nada hay que usar menos contenedores (se sigue teniendo que usar algunos por la restricción de usar más contenedores que vagones y 0 no es mayor que 0 luego se tienen que usar contenedores y suficientes vagones para llevarlos)
 		\subsection{Analisis de complejidad}
-		Para el problema de la compra, teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 5 variables y 13 restricciones (sin tener en cuenta las restricciones para que las variables sean numeros enteros no negativos). Las ultimas 10 restricciones estan hechas para juntar el límite de stock y el maximo de elementos que se pueden comprar y que de esta forma el modelo permita incluir otro tipo de productos para comprar y otras restricciones de forma más fácil, para este caso en concreto se podria modelizar con solo 7 restricciones ya que muchas de ellas vuelven a ser la restricción de que las variables sean no negativas(como esta puesto en el archivo de calc). Teniendo en cuenta las restricciones de stock, el problema puede tomar $3^3+4^2$, es decir, 43 posibles valores.\\
+		Para el problema de la compra, teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 5 variables y 13 restricciones (sin tener en cuenta las restricciones para que las variables sean numeros enteros no negativos). Las ultimas 10 restricciones estan hechas para juntar el límite de stock y el máximo de elementos que se pueden comprar y que de esta forma el modelo permita incluir otro tipo de productos para comprar y otras restricciones de forma más fácil, para este caso en concreto se podria modelizar con solo 7 restricciones ya que muchas de ellas vuelven a ser la restricción de que las variables sean no negativas(como esta puesto en el archivo de calc). Teniendo en cuenta las restricciones de stock, el problema puede tomar $3^3+4^2$, es decir, 43 posibles valores.\\
 		Para el problema de la asignación, teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 72 variables binarias, es decir, que hay $2^{72}\approx4.7*10^{21}$ posibles valores que pueden tomar nuestro resultado, y con 132 restricciones (sin tener en cuenta las que limitan a que las variables sean binarias).\\
-		A la hora de cambiar las variables y parámetros, en el problema de la compra, solo afecta la cantidad que se quiera comprar total y el stock maximo de cada fábrica, al disminuir el stock de la primera fábrica decrece el límite superior de las variables y al decrecer el el stock de la segunda aumenta el límite inferior. Con respecto a el problema de la asignación, la formula para sacar la cantidad de restricciones es: 
+		A la hora de cambiar las variables y parámetros, en el problema de la compra, solo afecta la cantidad que se quiera comprar total y el stock máximo de cada fábrica, al disminuir el stock de la primera fábrica decrece el límite superior de las variables y al decrecer el el stock de la segunda aumenta el límite inferior. Con respecto a el problema de la asignación, la formula para sacar la cantidad de restricciones es: 
 		$$
 		3*r+r*ct+v*ct+3*c+r*v*c+v+l
 		$$
 		\begin{align*}
-			r:& numero de rutas\\
-			l:& numero de locomotoras\\
-			v:& numero de vagones\\
-			c:& numero de contenedores\\
-			vt:& numero de tipos de vagones\\
-			ct:& numero de tipo de contenedores
+			r:& n\acute{u}mero\ de\ rutas\\
+			l:& n\acute{u}mero\ de\ locomotoras\\
+			v:& n\acute{u}mero\ de\ vagones\\
+			c:& n\acute{u}mero\ de\ contenedores\\
+			vt:& n\acute{u}mero\ de\ tipos\ de\ vagones\\
+			ct:& n\acute{u}mero\ de\ tipo\ de\ contenedores
 		\end{align*}
 		Sacando los valores a los que afecta el crecimiento de cada variable sacamos lo siguiente:
 		\begin{align*}
@@ -416,11 +416,11 @@
 		$$r>v>c>ct>l>vt = 0$$
 		Y con respecto a la complejidad de las variables, siguiendo el mismo planeteamiento:
 		\begin{align*}
-			&Ecuacion:\ c*v+c*r+v*r+l*r\\
+			&Ecuaci\acute{o}n:\ c*v+c*r+v*r+l*r\\
 			&Suposiciones:\ c > v > l > r\\
 			&Lo\ que\ afecta\ cada\ variable\ al\ crecimiento:\ r > v > c > l > ct = vt = 0
 		\end{align*}
-		Lo que además es consistente con lo que afecta a la complejidad de las restricciones, excepto los tipos de contenedores, y tambien es consistente con los ejemplos hechos.
+		Lo que además es consistente con lo que afecta a la complejidad de las restricciones, excepto los tipos de contenedores, y también es consistente con los ejemplos hechos.
 		\subsection{Cuestiones}
 			\subsubsection{Composición final}
 			\begin{tabbing}
@@ -432,11 +432,13 @@
 			\>Vagones: 2
 			\end{tabbing}
 			\subsubsection{Mejor tipo de Vagón}
-			Mirando a el cuadro \ref{tab:params1} y \ref{tab:params2rut}, se puede ver que un contenedor de 40' es objetivamente mejor ya que el coste de tranportar una tonelada por kilometro y el precio que te cuesta una tonelada de almacenamiento al comprar los ocntenedores es menor en los de 40' para ambas rutas y ambas fábricas.
+			Mirando a el cuadro \ref{tab:params1} y \ref{tab:params2rut}, se puede ver que un contenedor de 40' es objetivamente mejor ya que el coste de tranportar una tonelada por kilómetro y el precio que te cuesta una tonelada de almacenamiento al comprar los ocntenedores es menor en los de 40' para ambas rutas y ambas fábricas.
 		\subsection{Calc frente a GLPK}
 		Habiendo modelado al menos el primer trabajo en las dos plataformas, y habiendo explorando en profundidad las posibilidades que ofrece GLPK, calc es una herramienta para el modelado de tareas de programación lineal que es muy gráfico y permite ver con facilidad las restricciones, las variables y los resultados, no obstante, a diferencia de GLPK, es muy complicado hacer muchas restricciones ya que en GLPK se puede hacer de forma iterativa y en calc se tiene que poner explicitamente todas y cada una de ellas.
 		
 	\section{Conclusiones acerca de la práctica}
+	La práctica nos ha llevado a la realización de ejercicios de programación lineal por medio de calc y de GLPK. Con ello hemos podido comprobar que el método simplex en calc puede ser beneficioso en el caso de que sea un problema muy sencillo ya que estar poniendo restricciones una a una como pasa en el caso del segundo ejercicio sería muy tedioso. Sin embargo, con GLPK se nos permite la realización de restricciones de forma iterativa lo cual puede facilitar el desarrollo del problema aunque el lenguaje empleado sea un poco complicado en un principio.\\
+	También hemos conseguido entender mejor el método simplex y los tipos de funciones que se permiten en la programación lineal ya que se intentó hacer un modelo más eficiente para el modelo de la asignación pero lo más cercano que se pudo llegar a una funcion lineal con ese modelo fue usando el valor absoluto de una función, lo que no sabiamos que no era una función lineal.
 	\newpage
 %------------------------------------------------------------------------------------------
 
