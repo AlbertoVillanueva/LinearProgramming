@@ -96,7 +96,7 @@
 
 %------------------------------------------------------------------------------------------
 	\section{Intorducción}
-	En este documento se explican los modelos de los ejercicios de programación lineal y dinámica, en los de lineal explicando que representa cada conjunto, variable, y restricción. A continuación se analizan los resultados de los modelos, su complejudad y las ventajas y desventajas de usar calc repecto a GLPK y finalmente se procede a la conclusión de la práctica.
+	En este documento se explican los modelos de los ejercicios de programación lineal y dinámica, en los de lineal explicando que representa cada conjunto, variable, y restricción. A continuación se analizan los resultados de los modelos, su complejidad y las ventajas y desventajas de usar calc repecto a GLPK y finalmente se procede a la conclusión de la práctica.
 
 	\section{Descripción de los modelos}
 		\subsection{Modelo para la compra}
@@ -115,12 +115,12 @@
 			\end{align*}
 			
 			\subsubsection{Parámetros}
-			Para el cálculo de la función objetivo y de las restricciones se han hecho con respecto a varios parámetro que se nos proporcionaban en el enunciado:
+			Para el cálculo de la función objetivo y de las restricciones se han hecho con respecto a los datos que se nos proporcionaban en el enunciado:
 			
 			\begin{align*}
 			Necesidad_p:& Cantidad\ de\ productos\ tipo\ p\ que\ se\ necesitan. \\
-			Stock\ Primera_p:& Cantidad\ de\ productos\ tipo\ p\ que\ la\ primera\ f\acute{a}brica\ puede proveer. \\
-			Stock\ Segunda_p:& Cantidad\ de\ productos\ tipo\ p\ que\ la\ segunda\ f\acute{a}brica\ puede proveer. \\
+			Stock\ Primera_p:& Cantidad\ de\ productos\ tipo\ p\ que\ la\ primera\ f\acute{a}brica\ puede\ proveer. \\
+			Stock\ Segunda_p:& Cantidad\ de\ productos\ tipo\ p\ que\ la\ segunda\ f\acute{a}brica\ puede\ proveer. \\
 			Coste\ Primera_p:& Coste\ de\ comprar\ y\ transportar\ un\ elemento\ p\ de\ la\ primera f\acute{a}brica\ al\ destino. \\
 			Coste\ Segunda_p:& Coste\ de\ comprar\ y\ transportar\ un\ elemento\ p\ de\ la\ segunda f\acute{a}brica\ al\ destino. \\
 			&\forall p \in productos 
@@ -192,7 +192,7 @@
 				rutas :=& \{ Madrid-Valencia, Madric-C\acute{a}diz \}
 			\end{align*}
 			\subsubsection{Variables de decisión}
-			Al tratarse de un ejercicio de programación lineal de asignación, las variables son matrices binarias que representa la distribución de los elementos de las filas entre los elementos de las columnas. Por los requisitos que pide el enunciado las matrices que se necesitan son las siguientes:
+			Al tratarse de un ejercicio de programación lineal de asignación, las variables son matrices binarias que representan la distribución de los elementos de las filas entre los elementos de las columnas. Por los requisitos que pide el enunciado las matrices que se necesitan son las siguientes:
 			\begin{align*}
 				CV_{contenedores\ todos\ x\ vagones\ todos} :& Indica\ en\ que\ vag\acute{o}n\ va\ cada\ contenedor.\text{\footnotemark} \\
 				CR_{contenedores\ todos\ x\ rutas} :& Indica\ en\ que\ ruta\ va\ cada\ contenedor.\\
@@ -210,9 +210,9 @@
 				&\forall r \in rutas\\
 				Traslado_{ct,r}:& Lo\ que\ cuesta\ trasladar\ un\ contenedor\ de\ tipo\ ct\ en\ la\ ruta\ r.\\
 				&\forall ct \in contenedores\ tipos, \forall r \in rutas \\
-				Limite\ Contenedor_{ct}:& La\ cantidad\ de\ mercancia\ que\ puede\ trasladar\ un\ contenedor\ de\ tipo\ ct.\\
+				L\acute{i}mite\ Contenedor_{ct}:& La\ cantidad\ de\ mercancia\ que\ puede\ trasladar\ un\ contenedor\ de\ tipo\ ct.\\
 				&\forall ct \in contenedores\ tipos\\
-				Limite\ Vag\acute{o}n_{vt,ct}:& La\ cantidad\ de\ contenedores\ tipo\ ct\ que\ puede\ trasladar\ un\ vag\acute{o}n\ tipo\ vt.\\
+				L\acute{i}mite\ Vag\acute{o}n_{vt,ct}:& La\ cantidad\ de\ contenedores\ tipo\ ct\ que\ puede\ trasladar\ un\ vag\acute{o}n\ tipo\ vt.\\
 				&\forall vt \in vagones\ todos, \forall ct \in contenedores\ tipos\\
 			\end{align*}
 			\\
@@ -236,8 +236,8 @@
 				\hline
 				\multicolumn{2}{|c||}{}& Cont20 & Cont40 \\
 				\hline
-				\multicolumn{2}{|c||}{Limite Contenedor} & 32 & 67\\
-				\multirow{2}{*}{Limite Vagón} & Vag1 & 2 & 0\\
+				\multicolumn{2}{|c||}{Límite Contenedor} & 32 & 67\\
+				\multirow{2}{*}{Límite Vagón} & Vag1 & 2 & 0\\
 				& Vag2 & 2 & 1\\
 				\hline
 			\end{tabular}
@@ -248,8 +248,8 @@
 			minimizar\ coste = \sum_r^{rutas} \left( \sum_{ct}^{contenedores\ tipos} \left( \sum_c^{contenedores_{ct}} CR_{c,r} \right) * Traslado_{ct,r} \right) * Distancia_r
 			$$
 			\subsubsection{Restricciones}
-			El problema, por como esta presentado, presenta 3 restricciones muy claras; que se tienen que transportar cierta cantidad de mercancias en cada ruta (\ref{eq:SatisfaceMercancias}), que las rutas cumplan los límites de contenedores que los vagones asignados a esa ruta le permitan(\ref{eq:RutaCumpleLimitesContenedores}) y que se tiene que evitar el uso innecesario de vagones(\ref{eq:EvitaUsoInnecesario}). También, al tratarse de un problemade asignación, en nuestras variables, un elemento solo puede ser asignado a una cosa (\ref{eq:unaRutaPorContenedor}-\ref{eq:unVagonPorContenedor}) y además se asume tiene que haber al menos una locomotora en cada ruta (\ref{eq:alMenosUnaLocomotoraPorRuta}).\\
-			Para asegurarse de que la coherencia entre las variables CV, VR, y VR se restringe que los vagones cumplan los límites de contenedores que pueden trasladar (\ref{eq:VagonesCumplenLimitesContenedores}), que se asignen a vagones los mismos contenedores que se asignan a rutas (\ref{eq:CoherenciaTotalidadContenedores}) y que, teniendo en cuenta esas otras dos restricciones, si un contenedor esta asignado a una vagón y un vagón esta asignado a una ruta, que el contenedor este asignado a esa ruta (\ref{eq:Coherencia_CV_CR}).\footnote{La forma más directa de hacer esto es usar un and, sin embargo trasladar un and del mundo binario al entero lo convierte en una multiplicación de variables por lo que deja de ser lineal, para solucionarlo se ha hecho una restricción (\ref{eq:Coherencia_CV_CR}) que te garantiza: a=1 and b = 1 --> c = 1, pero si a o b es 0 no te garantiza que c sea 0, para completar esto y que así tenga la funcionalidad de una and se han usado otras 2 restricciones(\ref{eq:VagonesCumplenLimitesContenedores})(\ref{eq:CoherenciaTotalidadContenedores}).}
+			El problema, por como esta presentado, presenta 3 restricciones muy claras; que se tienen que transportar cierta cantidad de mercancias en cada ruta (\ref{eq:SatisfaceMercancias}), que las rutas cumplan los límites de contenedores que los vagones asignados a esa ruta le permitan(\ref{eq:RutaCumpleLimitesContenedores}) y que se tiene que evitar el uso innecesario de vagones(\ref{eq:EvitaUsoInnecesario}). También, al tratarse de un problema de asignación, en nuestras variables, un elemento solo puede ser asignado a una cosa (\ref{eq:unaRutaPorContenedor}-\ref{eq:unVagonPorContenedor}) y además se asume tiene que haber al menos una locomotora en cada ruta (\ref{eq:alMenosUnaLocomotoraPorRuta}).\\
+			Para asegurarse de que la coherencia entre las variables CV, VR, y VR se restringe que los vagones cumplan los límites de contenedores que pueden trasladar (\ref{eq:VagonesCumplenLimitesContenedores}), que se asignen a vagones los mismos contenedores que se asignan a rutas (\ref{eq:CoherenciaTotalidadContenedores}) y que, teniendo en cuenta esas otras dos restricciones, si un contenedor esta asignado a una vagón y un vagón esta asignado a una ruta, que el contenedor este asignado a esa ruta (\ref{eq:Coherencia_CV_CR}).\footnote{La forma más directa de hacer esto es usar un and, sin embargo trasladar un and del mundo binario al entero lo convierte en una multiplicación de variables por lo que deja de ser lineal, para solucionarlo se ha hecho una restricción (\ref{eq:Coherencia_CV_CR}) que te garantiza: a = 1 and b = 1 --> c = 1, pero si a o b es 0 no te garantiza que c sea 0, para completar esto y que así tenga la funcionalidad de una and se han usado otras 2 restricciones(\ref{eq:VagonesCumplenLimitesContenedores})(\ref{eq:CoherenciaTotalidadContenedores}).}
 			$$
 				CV_{c,v},CR_{c,r},VR_{v,r},LR_{l,r} \in \mathbb{Z}_2
 			$$
@@ -257,14 +257,14 @@
 				\forall c \in contenedores\ todos, \forall v \in vagones\ todos, \forall l \in locomotoras, \forall r \in rutas	
 			\end{equation}
 			$$
-				\sum_{ct}^{contenedores\ tipos}\left(\left( \sum_c^{contenedores{ct}} CR_{c,r} \right) * Limite\ Contenedor_{ct} \right) \geq  Mercancias_r;
+				\sum_{ct}^{contenedores\ tipos}\left(\left( \sum_c^{contenedores{ct}} CR_{c,r} \right) * L\acute{i}mite\ Contenedor_{ct} \right) \geq  Mercancias_r;
 			$$
 			\begin{equation}
 				\label{eq:SatisfaceMercancias}
 				\forall r \in rutas
 			\end{equation}
 			$$
-				\sum_c^{contenedores_{ct}} CR_{c,r} \leq \sum_{vt}^{vagones\ tipos} \left( \left(\sum_v^{vagones_{vt}}VR_{v,r}\right)*Limite\ Vag\acute{o}n_{vt,ct} \right);
+				\sum_c^{contenedores_{ct}} CR_{c,r} \leq \sum_{vt}^{vagones\ tipos} \left( \left(\sum_v^{vagones_{vt}}VR_{v,r}\right)*L\acute{i}mite\ Vag\acute{o}n_{vt,ct} \right);
 			$$
 			\begin{equation}
 				\label{eq:RutaCumpleLimitesContenedores}
@@ -276,7 +276,7 @@
 				-1+\sum_c^{contenedores\ todos} CR_{c,r} \geq \sum_v^{vagones\ todos} VR_{v,r};\ \forall r \in rutas
 			\end{equation}
 			$$
-			\sum_c^{contenedores_{ct}}CV_{c,v} \leq Limite\ Vag\acute{o}n_{vt,ct};
+			\sum_c^{contenedores_{ct}}CV_{c,v} \leq L\acute{i}mite\ Vag\acute{o}n_{vt,ct};
 			$$
 			\begin{equation}
 				\label{eq:VagonesCumplenLimitesContenedores}
@@ -320,13 +320,13 @@
 			$p_i$ es la capacidad que ocupa el elemento $p_i$.\\
 			$v_i$ es la utilidad de elemento $v_i$.\\
 			Para ello se ha usado el uso de una tabla y se ha ido calculando todos los elementos por columnas empezando con que la primera fila y primera columna tienen valor 0 (la máxima utilidad de 0 elementos o de 0 de capacidad es 0 asumiendo que la capacidad tiene que ser positiva).\\
-			Una vez se tiene la utilidad máxima se puede recuperar los elementos que se usan de una forma muy fácil, si en una casilla cualquiera, $V_i^C=V_{i-1}^C$ eso quiere decir que el elemento i forma parte de la solución de utilidad máxima, y el resto de elementos son los correspondientes a la solución de $V_{i-1}^{C-p_i}$. Si $V_i^C \neq V_{i-1}^C$ el elemento i no pertenece a la solución optima luego los elementos que si pertenecen son los correspondientes a al solución de $V_{i-1}^C$.
+			Una vez se tiene la utilidad máxima se puede recuperar los elementos que se usan de una forma muy fácil, si en una casilla cualquiera, $V_i^C=V_{i-1}^C$ eso quiere decir que el elemento i forma parte de la solución de utilidad máxima, y el resto de elementos son los correspondientes a la solución de $V_{i-1}^{C-p_i}$. Si $V_i^C \neq V_{i-1}^C$ el elemento i no pertenece a la solución óptima luego los elementos que si pertenecen son los correspondientes a al solución de $V_{i-1}^C$.
 			\subsubsection{Cuestiones}
-			Un algoritmo de fuerza bruta tendria que comprobar todas las combinaciones de inclusión/exclusión de los contenedores, es decir $2^{100} \approx 1.26*10^{30}$, este algoritmo de programación dinámica realiza $9*10^5$ (sin contabilizar la primera fila y columna ya que son solo 0).\\
+			Un algoritmo de fuerza bruta tendría que comprobar todas las combinaciones de inclusión/exclusión de los contenedores, es decir $2^{100} \approx 1.26*10^{30}$, este algoritmo de programación dinámica realiza $9*10^5$ (sin contabilizar la primera fila y columna ya que son solo 0).\\
 			En este caso en concreto, al usarse una tabla que se calcula entera, no hay diferencia, sin embargo si se hiciera con el algoritmo de forma recursiva, el algoritmo se beneficiaria de ordenarlo en función de la capacidad que ocupa ya que asi C decrece más rapido al principio y se acaba ramificando menos.
-	\section{Analisis de los resultados}
-		\subsection{Solucion}
-		A continuación se muestra una solución obtenida, en una de las ejecuciones, sin embargo hay más de una solución optima, ya que 2 vagones o contenedores del mismo tipo son completamento intercambiables sin que afecte a la solución.
+	\section{Análisis de los resultados}
+		\subsection{Solución}
+		A continuación se muestra una solución obtenida, en una de las ejecuciones, sin embargo hay más de una solución óptima, ya que 2 vagones o contenedores del mismo tipo son completamento intercambiables sin que afecte a la solución. Además se ha incluido código suficiente en el archivo de glpk para que cuando se ejecute cree el archivo solucion.txt con la solución puesta de la forma que se muestra a continuación para que sea más fácil entenderlo.
 		\begin{tabbing}
 		Prod\=uctos comprados en la Fabrica 1:\\
 		\>	locomotoras: 2\\
@@ -382,7 +382,7 @@
 			\subsubsection{Restricciones que limitan el problema}
 			En el problema de la compra, el límite de stock no cambia en nada a no ser que el stock de la fábrica que tiene el producto más barato no tenga suficiente como para suministrar la necesidad, la prioridad de tiempo tiene un ligero impacto pero no muy grande y el que más impacto tiene es evitar el monopolio (quitando esa restricción el coste de la compra pasa de 662360 a 622740) ya que se obliga a comprar productos más caros para que el balance se mantenga.
 			En el problema de la asignación, la restricción de los límites que tienen los vagones afecta un poco (ya que usar contenedores de 40' es más eficiente que los de 20' segun lo que cuesta trasladarlos) y la restricción de usar más contenedores que vagones no afecta en nada pero la que realmente afecta, claramente, es la carga que se tiene que trasladar, ya que si no se tiene que trasladar nada hay que usar menos contenedores (se sigue teniendo que usar algunos por la restricción de usar más contenedores que vagones y 0 no es mayor que 0 luego se tienen que usar contenedores y suficientes vagones para llevarlos)
-		\subsection{Analisis de complejidad}
+		\subsection{Análisis de complejidad}
 		Para el problema de la compra, teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 5 variables y 13 restricciones (sin tener en cuenta las restricciones para que las variables sean numeros enteros no negativos). Las ultimas 10 restricciones estan hechas para juntar el límite de stock y el máximo de elementos que se pueden comprar y que de esta forma el modelo permita incluir otro tipo de productos para comprar y otras restricciones de forma más fácil, para este caso en concreto se podria modelizar con solo 7 restricciones ya que muchas de ellas vuelven a ser la restricción de que las variables sean no negativas(como esta puesto en el archivo de calc). Teniendo en cuenta las restricciones de stock, el problema puede tomar $3^3+4^2$, es decir, 43 posibles valores.\\
 		Para el problema de la asignación, teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 72 variables binarias, es decir, que hay $2^{72}\approx4.7*10^{21}$ posibles valores que pueden tomar nuestro resultado, y con 132 restricciones (sin tener en cuenta las que limitan a que las variables sean binarias).\\
 		A la hora de cambiar las variables y parámetros, en el problema de la compra, solo afecta la cantidad que se quiera comprar total y el stock máximo de cada fábrica, al disminuir el stock de la primera fábrica decrece el límite superior de las variables y al decrecer el el stock de la segunda aumenta el límite inferior. Con respecto a el problema de la asignación, la formula para sacar la cantidad de restricciones es: 
