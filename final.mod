@@ -91,42 +91,42 @@ s.t. unVagonPorContenedor {c in CONTENEDORES_TODOS}: sum{v in VAGONES_TODOS}CV[c
 
 solve;
 
-printf "Productos comprados en la Fabrica 1:\n" > "res.txt";
-printf{p in PRODUCTOS}: "\t%s: %i\n", p, units[p] >> "res.txt";
+printf "Productos comprados en la Fabrica 1:\n" > "solucion.txt";
+printf{p in PRODUCTOS}: "\t%s: %i\n", p, units[p] >> "solucion.txt";
 
-printf "\nProductos comprados en la Fabrica 2:\n" >> "res.txt";
-printf{p in PRODUCTOS}: "\t%s: %i\n", p, Necesidad[p]-units[p] >> "res.txt";
+printf "\nProductos comprados en la Fabrica 2:\n" >> "solucion.txt";
+printf{p in PRODUCTOS}: "\t%s: %i\n", p, Necesidad[p]-units[p] >> "solucion.txt";
 
-printf "\nDisposición de contenedores en vagones:\n" >> "res.txt";
+printf "\nDisposición de contenedores en vagones:\n" >> "solucion.txt";
 for{c in CONTENEDORES_TODOS}
 {
-	printf{v in VAGONES_TODOS: CV[c,v]}: "\t%s --> %s\n",c,v >> "res.txt";
-	printf {1..1: sum{v in VAGONES_TODOS} CV[c,v] == 0}: "\t%s --> No Asignado\n",c >> "res.txt";
+	printf{v in VAGONES_TODOS: CV[c,v]}: "\t%s --> %s\n",c,v >> "solucion.txt";
+	printf {1..1: sum{v in VAGONES_TODOS} CV[c,v] == 0}: "\t%s --> No Asignado\n",c >> "solucion.txt";
 }
 
-printf "\nDisposición de contenedores en rutas:\n" >> "res.txt";
+printf "\nDisposición de contenedores en rutas:\n" >> "solucion.txt";
 for{c in CONTENEDORES_TODOS}
 {
-	printf{r in RUTAS: CR[c,r]}: "\t%s --> %s\n",c,r >> "res.txt";	
-	printf {1..1: sum{r in RUTAS} CR[c,r] == 0}: "\t%s --> No Asignado\n",c >> "res.txt";
+	printf{r in RUTAS: CR[c,r]}: "\t%s --> %s\n",c,r >> "solucion.txt";	
+	printf {1..1: sum{r in RUTAS} CR[c,r] == 0}: "\t%s --> No Asignado\n",c >> "solucion.txt";
 }
 
-printf "\nDisposición de vagones en rutas:\n" >> "res.txt";
+printf "\nDisposición de vagones en rutas:\n" >> "solucion.txt";
 for{v in VAGONES_TODOS}
 {
-	printf {r in RUTAS: VR[v,r]}:"\t%s --> %s\n",v,r >> "res.txt";
-	printf {1..1: sum{r in RUTAS} VR[v,r] == 0}: "\t%s --> No Asignado\n",v >> "res.txt";
+	printf {r in RUTAS: VR[v,r]}:"\t%s --> %s\n",v,r >> "solucion.txt";
+	printf {1..1: sum{r in RUTAS} VR[v,r] == 0}: "\t%s --> No Asignado\n",v >> "solucion.txt";
 }
 
-printf "\nDisposición de locomotoras en rutas:\n" >> "res.txt";
+printf "\nDisposición de locomotoras en rutas:\n" >> "solucion.txt";
 for{l in LOCOMOTORAS}
 {
-	printf {r in RUTAS: LR[l,r]}: "\t%s --> %s\n",l,r >> "res.txt";
-	printf {1..1: sum{r in RUTAS} LR[l,r] == 0}: "\t%s --> No Asignado\n",l >> "res.txt";
+	printf {r in RUTAS: LR[l,r]}: "\t%s --> %s\n",l,r >> "solucion.txt";
+	printf {1..1: sum{r in RUTAS} LR[l,r] == 0}: "\t%s --> No Asignado\n",l >> "solucion.txt";
 }
 
-printf "\nCoste Minimizado de la compra: %i\n", sum{p in PRODUCTOS} (units[p]*CostePrimera[p] + (Necesidad[p] - units[p])*CosteSegunda[p]) >> "res.txt";
-printf "Coste Minimizado del traslado: %i\n", sum{r in RUTAS}(sum{ct in CONTENEDORES_TIPOS,c in CONTENEDORES[ct]}CR[c,r]*Traslado[ct,r])*Distancia[r] >> "res.txt";
-printf "Coste Minimizado total       : %i\n", sum{p in PRODUCTOS} (units[p]*CostePrimera[p] + (Necesidad[p] - units[p])*CosteSegunda[p]) + sum{r in RUTAS}(sum{ct in CONTENEDORES_TIPOS,c in CONTENEDORES[ct]}CR[c,r]*Traslado[ct,r])*Distancia[r]>> "res.txt";
+printf "\nCoste Minimizado de la compra: %i\n", sum{p in PRODUCTOS} (units[p]*CostePrimera[p] + (Necesidad[p] - units[p])*CosteSegunda[p]) >> "solucion.txt";
+printf "Coste Minimizado del traslado: %i\n", sum{r in RUTAS}(sum{ct in CONTENEDORES_TIPOS,c in CONTENEDORES[ct]}CR[c,r]*Traslado[ct,r])*Distancia[r] >> "solucion.txt";
+printf "Coste Minimizado total       : %i\n", sum{p in PRODUCTOS} (units[p]*CostePrimera[p] + (Necesidad[p] - units[p])*CosteSegunda[p]) + sum{r in RUTAS}(sum{ct in CONTENEDORES_TIPOS,c in CONTENEDORES[ct]}CR[c,r]*Traslado[ct,r])*Distancia[r]>> "solucion.txt";
 
 end;
