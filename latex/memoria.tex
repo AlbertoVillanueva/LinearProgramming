@@ -14,6 +14,7 @@
 \usepackage{hyperref}
 \usepackage{multirow}
 \usepackage{caption}
+\usepackage{graphicx}
 
 \hypersetup{
     colorlinks,
@@ -323,10 +324,10 @@
 			Una vez se tiene la utilidad máxima se puede recuperar los elementos que se usan de una forma muy fácil, si en una casilla cualquiera, $V_i^C=V_{i-1}^C$ eso quiere decir que el elemento i forma parte de la solución de utilidad máxima, y el resto de elementos son los correspondientes a la solución de $V_{i-1}^{C-p_i}$. Si $V_i^C \neq V_{i-1}^C$ el elemento i no pertenece a la solución óptima luego los elementos que si pertenecen son los correspondientes a al solución de $V_{i-1}^C$.
 			\subsubsection{Cuestiones}
 			Un algoritmo de fuerza bruta tendría que comprobar todas las combinaciones de inclusión/exclusión de los contenedores, es decir $2^{100} \approx 1.26*10^{30}$, este algoritmo de programación dinámica realiza $9*10^5$ (sin contabilizar la primera fila y columna ya que son solo 0).\\
-			En este caso en concreto, al usarse una tabla que se calcula entera, no hay diferencia, sin embargo si se hiciera con el algoritmo de forma recursiva, el algoritmo se beneficiaria de ordenarlo en función de la capacidad que ocupa ya que asi C decrece más rapido al principio y se acaba ramificando menos.
+			En este caso en concreto, al usarse una tabla que se calcula entera, no hay diferencia, sin embargo si se hiciera con el algoritmo de forma recursiva, el algoritmo se beneficiaria de ordenarlo en función de la capacidad que ocupa ya que asi C decrece más rápido al principio y se acaba ramificando menos.
 	\section{Análisis de los resultados}
 		\subsection{Solución}
-		A continuación se muestra una solución obtenida, en una de las ejecuciones, sin embargo hay más de una solución óptima, ya que 2 vagones o contenedores del mismo tipo son completamento intercambiables sin que afecte a la solución. Además se ha incluido código suficiente en el archivo de glpk para que cuando se ejecute cree el archivo solucion.txt con la solución puesta de la forma que se muestra a continuación para que sea más fácil entenderlo.
+		A continuación se muestra una solución obtenida, en una de las ejecuciones, sin embargo hay más de una solución óptima, ya que 2 vagones o contenedores del mismo tipo son completamento intercambiables sin que afecte a la solución. Además se ha incluido código suficiente en el archivo de GLPK para que cuando se ejecute cree el archivo solucion.txt con la solución puesta de la forma que se muestra a continuación para que sea más fácil entenderlo.
 		\begin{tabbing}
 		Prod\=uctos comprados en la Fabrica 1:\\
 		\>	locomotoras: 2\\
@@ -376,14 +377,14 @@
 			En la primera fábrica se compran 9 productos y en la fábrica 2 se compran 7 luego se compran más en la fábrica que esta más cerca.\\
 			En la primera fábrica, el precio total de las compras es de 341720 y en la segunda de 320640 luego evita que alguna fábrica tenga monopolio.\\
 			Mirando el cuadro \ref{tab:params1} se puede comprobar que no se supera el límite permitido por ninguna fábrica.\\
-			Segun los contenedores asignados a rutas, se pueden llevar 96 y 166 toneladas respectivamente a la ruta de Madrid-Valencia y Madrid-Cadiz luego se satisfacen la cantidad de mercancias que se tienen que transportar.\\
+			Según los contenedores asignados a rutas, se pueden llevar 96 y 166 toneladas respectivamente a la ruta de Madrid-Valencia y Madrid-Cadiz luego se satisfacen la cantidad de mercancias que se tienen que transportar.\\
 			Mirando el cuadro \ref{tab:params2cont} y la asignación de contenedores a vagones se ve que no se supera el límite que cada tipo de vagón permite.\\
 			En ambas rutas se usan 2 vagones y 3 contenedores luego se evita el uso innecesario.
 			\subsubsection{Restricciones que limitan el problema}
 			En el problema de la compra, el límite de stock no cambia en nada a no ser que el stock de la fábrica que tiene el producto más barato no tenga suficiente como para suministrar la necesidad, la prioridad de tiempo tiene un ligero impacto pero no muy grande y el que más impacto tiene es evitar el monopolio (quitando esa restricción el coste de la compra pasa de 662360 a 622740) ya que se obliga a comprar productos más caros para que el balance se mantenga.
-			En el problema de la asignación, la restricción de los límites que tienen los vagones afecta un poco (ya que usar contenedores de 40' es más eficiente que los de 20' segun lo que cuesta trasladarlos) y la restricción de usar más contenedores que vagones no afecta en nada pero la que realmente afecta, claramente, es la carga que se tiene que trasladar, ya que si no se tiene que trasladar nada hay que usar menos contenedores (se sigue teniendo que usar algunos por la restricción de usar más contenedores que vagones y 0 no es mayor que 0 luego se tienen que usar contenedores y suficientes vagones para llevarlos)
+			En el problema de la asignación, la restricción de los límites que tienen los vagones afecta un poco (ya que usar contenedores de 40' es más eficiente que los de 20' según lo que cuesta trasladarlos) y la restricción de usar más contenedores que vagones no afecta en nada pero la que realmente afecta, claramente, es la carga que se tiene que trasladar, ya que si no se tiene que trasladar nada hay que usar menos contenedores (se sigue teniendo que usar algunos por la restricción de usar más contenedores que vagones y 0 no es mayor que 0 luego se tienen que usar contenedores y suficientes vagones para llevarlos)
 		\subsection{Análisis de complejidad}
-		Para el problema de la compra, teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 5 variables y 13 restricciones (sin tener en cuenta las restricciones para que las variables sean numeros enteros no negativos). Las ultimas 10 restricciones estan hechas para juntar el límite de stock y el máximo de elementos que se pueden comprar y que de esta forma el modelo permita incluir otro tipo de productos para comprar y otras restricciones de forma más fácil, para este caso en concreto se podria modelizar con solo 7 restricciones ya que muchas de ellas vuelven a ser la restricción de que las variables sean no negativas(como esta puesto en el archivo de calc). Teniendo en cuenta las restricciones de stock, el problema puede tomar $3^3+4^2$, es decir, 43 posibles valores.\\
+		Para el problema de la compra, teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 5 variables y 13 restricciones (sin tener en cuenta las restricciones para que las variables sean números enteros no negativos). Las últimas 10 restricciones estan hechas para juntar el límite de stock y el máximo de elementos que se pueden comprar y que de esta forma el modelo permita incluir otro tipo de productos para comprar y otras restricciones de forma más fácil, para este caso en concreto se podría modelizar con solo 7 restricciones ya que muchas de ellas vuelven a ser la restricción de que las variables sean no negativas(como esta puesto en el archivo de calc). Teniendo en cuenta las restricciones de stock, el problema puede tomar $3^3+4^2$, es decir, 43 posibles valores.\\
 		Para el problema de la asignación, teniendo en cuenta los datos y conjuntos, el problema esta modelizado con 72 variables binarias, es decir, que hay $2^{72}\approx4.7*10^{21}$ posibles valores que pueden tomar nuestro resultado, y con 132 restricciones (sin tener en cuenta las que limitan a que las variables sean binarias).\\
 		A la hora de cambiar las variables y parámetros, en el problema de la compra, solo afecta la cantidad que se quiera comprar total y el stock máximo de cada fábrica, al disminuir el stock de la primera fábrica decrece el límite superior de las variables y al decrecer el el stock de la segunda aumenta el límite inferior. Con respecto a el problema de la asignación, la formula para sacar la cantidad de restricciones es: 
 		$$
@@ -424,15 +425,23 @@
 		\subsection{Cuestiones}
 			\subsubsection{Composición final}
 			\begin{tabbing}
-			Madr\=id-Valencia: C1-C3->V1-C2->V2\_L1\\
-			\>Contenedores: 3\\
-			\>Vagones: 2\\
-			Madrid-Cadiz: C4-C5->V4-C6->V5\_L2\\
+			Madr\=id-Valencia:\\
 			\>Contenedores: 3\\
 			\>Vagones: 2
 			\end{tabbing}
+			\begin{figure}[h!]
+				\includegraphics[width=0.8\linewidth]{MadricValencia.png}
+			\end{figure}
+			\begin{tabbing}
+			Madr\=id-Cadiz:\\
+			\>Contenedores: 3\\
+			\>Vagones: 2
+			\end{tabbing}
+			\begin{figure}[h!]
+				\includegraphics[width=0.8\linewidth]{MadricCadiz.png}
+			\end{figure}
 			\subsubsection{Mejor tipo de Vagón}
-			Mirando a el cuadro \ref{tab:params1} y \ref{tab:params2rut}, se puede ver que un contenedor de 40' es objetivamente mejor ya que el coste de tranportar una tonelada por kilómetro y el precio que te cuesta una tonelada de almacenamiento al comprar los ocntenedores es menor en los de 40' para ambas rutas y ambas fábricas.
+			Mirando a el cuadro \ref{tab:params1} y \ref{tab:params2rut}, se puede ver que un contenedor de 40' es objetivamente mejor ya que el coste de tranportar una tonelada por kilómetro y el precio que te cuesta una tonelada de almacenamiento al comprar los contenedores es menor en los de 40' para ambas rutas y ambas fábricas.
 		\subsection{Calc frente a GLPK}
 		Habiendo modelado al menos el primer trabajo en las dos plataformas, y habiendo explorando en profundidad las posibilidades que ofrece GLPK, calc es una herramienta para el modelado de tareas de programación lineal que es muy gráfico y permite ver con facilidad las restricciones, las variables y los resultados, no obstante, a diferencia de GLPK, es muy complicado hacer muchas restricciones ya que en GLPK se puede hacer de forma iterativa y en calc se tiene que poner explicitamente todas y cada una de ellas.
 		
